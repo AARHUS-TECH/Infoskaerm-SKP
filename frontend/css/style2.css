@@ -1,0 +1,78 @@
+body {
+    background-color: #ffff ;
+    font-family: 'poppins', serif;
+    padding: 0px;
+    margin: 0px;
+}
+
+.AARHUSTECH {
+    font-size: 70px;
+    padding: 0px 20px 0px;
+}
+
+.klokken {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 50px;
+}
+
+.dato {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+}
+
+.aktiviter {
+    background-color: #e62613;
+    background: linear-gradient(to bottom, #e62613, #a81b0e);
+    padding-top: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+    width: 1500px;
+    margin: 20px;
+    box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.4), 0 9px 30px 0 rgba(0, 0, 0, 0.27);
+}
+
+.netværksstatus {
+    background-color: lightgrey;
+    position: absolute;
+    padding-top: 2px;
+    padding-left: 10px;
+    height: 30px;
+    width: 145px;
+    top: 140px;
+    left: 1370px;
+    box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.4), 0 9px 30px 0 rgba(0, 0, 0, 0.27);
+}
+
+.info {
+    position: relative;
+    padding: 10px 30px 0px;
+    left: 20px;
+    width: 500px;
+    height: 500px;
+    box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.4), 0 9px 30px 0 rgba(0, 0, 0, 0.27);
+}
+
+.kontakt {
+    background-color: #e62613;
+    position: absolute;
+    top: 200px;
+    left: 850px;
+    width: 650px;
+    height: 450px;
+}
+
+.instruktoer {
+    color: #ffff;
+    padding: 30px 30px 0px;
+}
+
+.skp_website {
+    position: fixed;
+    color: #ffff;
+    padding-left: 300px;
+    top: 230px;
+}
