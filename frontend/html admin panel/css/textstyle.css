@@ -1,0 +1,80 @@
+body {
+  max-width: 100%;
+  margin: 0px;
+  padding: 0xp;
+}
+
+.container {
+  background-color: #d7d7d7;
+  align-content: center;
+  height: 430px;
+  width: 700px;
+  float: center;
+  margin-left: 390px;
+  z-index: 3;
+  margin-top: 20px;
+}
+
+#msgtitle {
+  float: bottom;
+  padding: 10px;
+}
+#msg {
+display: block;
+width: 500px;
+height: 150px;
+text-align: top;
+resize: none;
+}
+
+#title {
+width: 500px;
+height: 20px;
+display: block;
+resize: none;
+}
+
+#postmsg {
+  width: 160px;
+  float: relative;
+  margin: 4px;
+}
+
+#editmsg{
+  width: 160px;
+  float: relative;
+  margin: 4px;
+}
+
+#delmsg {
+  width: 160px;
+  float: relative;
+  margin: 4px;
+}
+
+#ttitle {
+  margin: 0px;
+}
+
+#tmessage {
+  margin: 0px;
+}
+
+.header {
+  font-family: 'poppins', serif;
+  font-size: 60px;
+  background-color: #e62613;
+  background: linear-gradient(to bottom, #e62613, #a81b0e);
+  color: white;
+  height: 80px;
+  width: relative;
+  padding: 10px;
+  text-align: center;
+}
+
+.center {
+position: absolute;
+left: 35%;
+padding: 10px;
+z-index: 2;
+}
