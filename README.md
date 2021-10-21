@@ -6,9 +6,10 @@ Made in NodeJS &amp; ExpressJS
 NodeJS 14.18.0+
 A way to show the database
 Redis-Server
-
+MySQL
 ```
-To use this project, you need to open your `Terminal` and write `npm i` then it can download all dependencies needed to use it
+To use this project, you need to open your `Terminal` and write `npm i` then it can download almost dependencies needed to use it
+You also need to install MySQL `sudo apt get mysql` (or mariadb) and also Redis-Server `sudo apt get redis-server`
 
 # Functions
 **Database funktioner**
@@ -22,7 +23,6 @@ getUser(id) // To get all details about a user
 addUser(firstname, middlename, surname, role, pswd, birth) // Add a user to the database
 ```
 # Database
-You need to make a database, a table called users and edit the code to use the table names. (there are already premade once, just remove those and replace it with whatever info you need)
+You need to make a database, a table called users and edit the code to use the table names. (there are already premade once, just remove those and replace it with whatever info you need). IDs is autoincrementing in the database.
 
-Disclaimer:
-Only things included is the things that I have made in the project
+Also make a table called users with Header (VARCHAR), Body (VARCHAR), StartDate (DATE), EndDate (DATE)
