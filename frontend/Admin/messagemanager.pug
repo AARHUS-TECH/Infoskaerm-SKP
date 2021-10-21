@@ -1,0 +1,25 @@
+doctype html
+html(lang='en' dir='ltr')
+  head
+    meta(charset='utf-8')
+    title Admin panel
+    style
+      include ./css/textstyle.css
+  body
+    .pb-2.mt-4.mb-2.border-bottom.header
+      | AARHUSTECH
+    .container
+      .center
+        h2#msgtitle Post message
+        form(action='/postnews' method="POST")
+          p#ttitle(for='fname') Title:
+            textarea#title(type='text' name='title')
+            br
+            br
+            label#tmessage(for='lname') Message:
+            textarea#msg(type='text' name='msg')
+            br
+            br
+            input#postmsg(type='submit' value='post message')
+            input#editmsg(type='submit' value='edit message')
+            input#delmsg(type='submit' value='delete message')
