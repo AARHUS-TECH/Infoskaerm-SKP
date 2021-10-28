@@ -11,7 +11,7 @@
       AARHUSTECH
     </div>
     
-    <div class="container">
+    <div class="container_msg">
     <div class="center">
       <h2 id="msgtitle">Post message</h2>
       <form action="/action_page.php">
@@ -19,12 +19,27 @@
       <textarea type="text" id="title" name="title"></textarea><br><br>
       <label id="tmessage" for="lname">Message:</label>
       <textarea type="text" id="msg" name="msg"></textarea><br><br>
-      
+        
+
       <input id="postmsg" type="submit" value="post message">
       <input id="editmsg" type="submit" value="edit message">
       <input id="delmsg" type="submit" value="delete message">
-    </form>
+      <div class="container_savedmsg" id="savedmsg"></div>
+      </form>
     </div>
+    <div class="startbox"  >
+      <label  for="start">Start dato:</label>
+      <input type="date" id="startdato" name="msg_startdato" required pattern="\d{4}-\d{2}-\d{2}">
+      
+    
+        <label for="end" class="endbox">Slut dato:</label>
+        <input type="date" id="enddato" name="msg_enddato" required pattern="\d{4}-\d{2}-\d{2}">
+    
+    </div>
+    
+    
+    
+    
   </div>
 
 
