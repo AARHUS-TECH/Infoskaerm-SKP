@@ -27,7 +27,7 @@ getUserMiddle(id); // Get persons middle name from their id
 getUserLast(id); // Get a users surname from their id
 getUser(id); // To get all details about a user
 addUser(firstname, middlename, surname, role, pswd, birth); // Add a user to the database
-addNews(title, nody, startDate, endDate) // Adds news to the database
+addNews("title", "body", startDate, endDate) // Adds news to the database
 getNewsTitle() // Fetches the Titles
 getNewsBody() // Fetches the Bodies
 ```
@@ -55,3 +55,8 @@ OS: Raspberry OS
 
 **Display:**
 37" TV
+
+# TO DO:
+- [ ] Add capability for more than 3 news (replace existing in order)
+- [ ] Implement startDate and endDate to the database
+- [ ] Delete after endDate
