@@ -35,7 +35,8 @@ html(lang='en')
             a(href='logout.pug')
               i.fas.fa-sign-out-alt
           span
-            a(href='logout.pug') Logout
+            form(action="logout" method="POST")
+              a Logout
     // javascript
     script(src='main.js')
     html
