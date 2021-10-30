@@ -6,9 +6,10 @@ Made in NodeJS &amp; ExpressJS
 
 ```js
 NodeJS 14.18.0+
+NPM
 A way to show the database
 Redis-Server
-MySQL
+MySQL/MariaDB
 ```
 
 To use this project, you need to open your `Terminal` and write `npm i` then it can download almost dependencies needed to use it
@@ -26,6 +27,9 @@ getUserMiddle(id); // Get persons middle name from their id
 getUserLast(id); // Get a users surname from their id
 getUser(id); // To get all details about a user
 addUser(firstname, middlename, surname, role, pswd, birth); // Add a user to the database
+addNews(Title, Body, Startdate, Enddate) // Adds news to the database
+GetNewsTitle() // Fetches the Titles
+GetNewsBody() // Fetches the Bodies
 ```
 
 # Database
@@ -34,18 +38,20 @@ You need to make a database, a table called users and edit the code to use the t
 
 Also make a table called users with **_Header (VARCHAR), Body (VARCHAR), StartDate (DATE), EndDate (DATE)_**
 
-# Disclaimer
+# Hardware we use
 
-Users table is in case you wanna add birthdays to display that in the future.
-
-# Hardware
-
-PC:
+**PC:**
 I5-3470 CPU
 Storage-120 gb hdd
 8gb ram
+OS: Ubuntu 20.04
 
+**Internet:**
 Extended Router
 
-Raspberry Pi
-OS: Ubuntu 20.04
+**Actual server:**
+Raspberry Pi 3
+OS: Raspberry OS
+
+**Display:**
+37" TV
