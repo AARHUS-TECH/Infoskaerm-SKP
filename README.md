@@ -27,9 +27,9 @@ getUserMiddle(id); // Get persons middle name from their id
 getUserLast(id); // Get a users surname from their id
 getUser(id); // To get all details about a user
 addUser(firstname, middlename, surname, role, pswd, birth); // Add a user to the database
-addNews("title", "body", startDate, endDate) // Adds news to the database
-getNewsTitle() // Fetches the Titles
-getNewsBody() // Fetches the Bodies
+addNews("title", "body", startDate, endDate); // Adds news to the database
+getNewsTitle(); // Fetches the Titles
+getNewsBody(); // Fetches the Bodies
 ```
 
 # Database
@@ -41,22 +41,23 @@ Also make a table called users with **_Header (VARCHAR), Body (VARCHAR), StartDa
 # Hardware we use
 
 **PC:**
-  I5-3470 CPU
-  Storage-120 gb hdd
-  8gb ram
-  OS: Ubuntu 20.04
+I5-3470 CPU
+Storage-120 gb hdd
+8gb ram
+OS: Ubuntu 20.04
 
 **Internet:**
-  Extended Router
+Extended Router
 
 **Actual server:**
-  Raspberry Pi 3
-  OS: Raspberry OS
+Raspberry Pi 3
+OS: Raspberry OS
 
 **Display:**
-  37" TV
+32" TV
 
 # TO DO:
+
 - [ ] Add capability for more than 3 news (replace existing in order)
 - [ ] Implement startDate and endDate to the database
 - [ ] Delete after endDate
