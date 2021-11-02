@@ -1,23 +1,23 @@
 const con = require('./lib/connection.js'),
-	express = require('express'),
-	isReachable = require('is-reachable'),
-	sess = require('express-session'),
-	bodyParser = require('body-parser'),
-	cookieParser = require("cookie-parser"),
-	encoder = bodyParser.urlencoded(),
-	path = require('path'),
-	redis = require('redis'),
-	redisStore = require('connect-redis')(sess),
-	client = redis.createClient();
+  express = require('express'),
+  isReachable = require('is-reachable'),
+  sess = require('express-session'),
+  bodyParser = require('body-parser'),
+  cookieParser = require("cookie-parser"),
+  encoder = bodyParser.urlencoded({ extended: true }),
+  path = require('path'),
+  redis = require('redis'),
+  redisStore = require('connect-redis')(sess),
+  client = redis.createClient();
 
 
 const {
-	body,
-	validationResult
+  body,
+  validationResult
 } = require('express-validator')
 
 //Hosting Port
-const PORT = 80
+const PORT = 3000
 
 // Network Display bool
 var status = "net1"
@@ -29,96 +29,162 @@ var verificationFailed = false
 
 // NIX PILLE
 loadSite()
-setInterval(loadSite, 10000) // 10000ms, website live reloads every 10 minutes
+setInterval(loadSite, 5000) // 600000ms, website live reloads every 10 minutes
 
 const app = express()
 var personList = []
 
 app.use(sess({
-	secret: 'Weneedaraise',
-	store: new redisStore({
-		host: 'localhost',
-		port: 6379,
-		client: client,
-		ttl: 260
-	}),
-	resave: false,
-	saveUninitialized: false,
+  secret: 'WeNeedARaise',
+  store: new redisStore({
+    host: 'localhost',
+    port: 6379,
+    client: client,
+    ttl: 260
+  }),
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 100000
+  }
 }))
+var db = con.getConnection()
+var titleText = con.getNewsTitle()
+var bodyText = con.getNewsBody()
 
-function loadSite() {
-	(async () => {
-		// Network Check
-		net1 = await isReachable('217.116.222.48') // LAV FLERE HVIS I FÅR FLERE IP'ER
-
-		// Database connection
-		var db = con.getConnection()
-
-		// view engine + public folder
-		app.set("views", "frontend")
-		app.set('view engine', 'pug')
-		app.use(bodyParser.json());
-		app.use(bodyParser.urlencoded({
-			extended: true
-		}));
-		app.use('/images', express.static('images'));
-		// net2 = await isReachable('217.116.222.48') // HUSK AT RET I INDEX.PUG
-		// Index site
-		app.get('/', function(req, res) {
-			res.render('index.pug', {
-				// sends net1 bool into the variable netstatus on index.pug
-				netstatus: net1
-			})
-		})
-
-
-		app.get("/login.pug", function(req, res) {
-			res.render('login.pug', {
-				verifyFail: verificationFailed
-			})
-		})
-
-		// Login system
-		app.post("/authenticate", encoder, function(req, res) {
-			var Id = req.body.id
-			var password = req.body.password
-			db.query('SELECT * FROM users', (err, rows) => {
-				if (err) throw err;
-
-				db.query("select * from users where Id = ? and password = ?", [Id, password], function(error, results, fields) {
-					if (results.length > 0 && rows[Id - 2].status == "superuser") {
-						req.session.key = Id;
-						console.log(req.session.key)
-						res.redirect("/users.pug")
-						//verificationStep = true
-						//res.app.set('verification', true)
-					} else {
-						//verificationFailed = true
-						res.redirect("/login.pug")
-					}
-					res.end()
-				})
-			});
-
-		})
-		// admin panel
-		app.get('/users.pug', function(req, res) {
-			let session = req.session
-			console.log(req.session.key)
-			console.log("user info: " + JSON.stringify(req.session))
-			if (session.key) {
-				console.log("DSAUIHD")
-				res.render('users.pug', {
-					loggedIn: res.app.get('verification'),
-					userID: "68"
-				})
-			} else {
-				console.log("error")
-				res.redirect("/login.pug")
-			}
-			//verificationStep = false
-		})
-	})()
+// Needed to update news on refresh, can't be used in an async function
+function getInfo() {
+  titleText = con.getNewsTitle()
+  bodyText = con.getNewsBody()
 }
 
-app.listen(PORT)
+async function loadSite() {
+    // Network Check
+    net1 = await isReachable('217.116.222.48') // LAV FLERE HVIS I FÅR FLERE IP'ER
+    // view engine + public folder
+    app.set("views", "frontend")
+    app.set('view engine', 'pug')
+    app.use('/Admin', express.static('/Admin'));
+    app.use(express.json())
+    app.use(express.urlencoded({ extended: true }));
+    app.use('/Admin', express.static('Admin'));
+    app.use('/images', express.static('images'));
+    // net2 = await isReachable('217.116.222.48') // an extra connection
+
+    // Index site
+    getInfo() // Update news
+    app.get('/', function(req, res) {
+      res.render('index.pug', {
+        // sends net1 bool into the variable netstatus on index.pug
+        netstatus: net1,
+        getNewsTitle: titleText,
+        getNewsBody: bodyText
+      })
+    })
+
+    //Login site
+    app.get("/login.pug", function(req, res) {
+      res.render('login.pug', {
+        verifyFail: req.session.verificationFailed // Transfer check over to pug file
+      })
+    })
+
+    // Login system authentication
+    app.post("/authenticate", encoder, function(req, res) {
+      var Id = req.body.id
+      var password = req.body.password
+      db.query('SELECT * FROM users', (err, rows) => {
+        db.query("select * from users where Id = ? and password = ?", [Id, password], function(error, results, fields) {
+          if (err) throw err;
+          if (results.length > 0 && rows[Id].status == "superuser") {
+            req.session.key = Id;
+            res.redirect("Admin/dashboard.pug")
+          } else {
+            req.session.verificationFailed = true // Check to make sure fail message is shown
+            res.redirect("/login.pug")
+          }
+        })
+      });
+
+    })
+
+    // admin panel
+    app.get('/Admin/dashboard.pug', function(req, res) {
+      let session = req.session
+      if (session.key) {
+        res.render('Admin/dashboard.pug'), {
+          userID: session.key
+        }
+      } else {
+        req.session.verificationFailed = true // Check to make sure fail message is shown
+        res.redirect("/login.pug")
+      }
+    })
+
+    app.get('/Admin/database.pug', function(req, res) {
+      let session = req.session
+      if (session.key) {
+        res.render('Admin/database.pug'), {
+          userID: session.key
+        }
+      } else {
+        req.session.verificationFailed = true // Check to make sure fail message is shown
+        res.redirect("/login.pug")
+      }
+    })
+
+    // admin panel
+    app.get('/Admin/messagemanager.pug', function(req, res) {
+      let session = req.session
+      if (session.key) {
+        res.render('Admin/messagemanager.pug'), {
+
+        }
+      } else {
+        req.session.verificationFailed = true // Check to make sure fail message is shown
+        res.redirect("/login.pug")
+      }
+    })
+
+    app.post('/postnews', function(req, res) {
+      var title = req.body.title
+      var body = req.body.msg
+      con.addNews(title.toString(), body.toString(), null, null)
+      res.redirect("Admin/dashboard.pug")
+    })
+
+    app.get('/Admin/users.pug', function(req, res) {
+      let session = req.session
+      if (session.key) {
+        res.render('Admin/users.pug'), {
+          userID: session.key
+        }
+      } else {
+        req.session.verificationFailed = true // Check to make sure fail message is shown
+        res.redirect("/login.pug")
+      }
+    })
+
+    app.post("/logout", function(req, res) {
+      req.session.destroy(function(err) {
+        res.redirect('/');
+      });
+    })
+
+    app.post("/createUser", function(req, res) {
+      fname = req.body.fornavn
+      mname = req.body.mellemnavn
+      sname = req.body.efternavn
+      rname = req.body.role
+
+      if (mname == "")
+        mname = null
+      if (rname != "user" || rname != "superuser")
+        rname = "user"
+
+      con.addUser(fname, mname, sname, rname, null)
+
+      res.redirect("Admin/users.pug?added=true")
+    })
+}
+app.listen(PORT, () => {console.log("Siden kan nu loades!")})
