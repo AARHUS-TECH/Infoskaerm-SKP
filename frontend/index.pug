@@ -1,72 +1,114 @@
 doctype html
+script.
+  //tid og dato//
+  document.addEventListener("DOMContentLoaded", function(event) {
+    if(#{netstatus} == false)
+      document.getElementById("netvaerksstatus").style.color = "red";
+    else
+    document.getElementById("netvaerksstatus").style.color = "green";
+    function clock() {
+      var time = new Date(),
+      hours = time.getHours(),
+      minutes = time.getMinutes()
+      document.querySelectorAll('.clock')[0].innerHTML = harold(hours) + ":" + harold(minutes);
+      var titleText = `#{getNewsTitle}`.split(":-:,")
+      var bodyText = `#{getNewsBody}`.split(":-:,")
+      
+      var pos = titleText.length
+      
+      //Header
+      document.querySelectorAll(".info_titeltext")[0].innerHTML = `<p>${titleText[pos-1].replace(":-:", "")}</p>`
+      document.querySelectorAll(".info_titeltext")[1].innerHTML = `<p>${titleText[pos-2].replace(":-:", "")}</p>`
+      document.querySelectorAll(".info_titeltext")[2].innerHTML = `<p>${titleText[pos-3].replace(":-:", "")}</p>`
+      
+      //Body
+      document.querySelectorAll(".info_text")[0].innerHTML = `<p>${bodyText[pos-1].replace(":-:","")}</p>`
+      document.querySelectorAll(".info_text")[1].innerHTML = `<p>${bodyText[pos-2].replace(":-:","")}</p>`
+      document.querySelectorAll(".info_text")[2].innerHTML = `<p>${bodyText[pos-3].replace(":-:","").replace("undefined", "")}</p>`
+
+      function harold(standIn) {
+        if (standIn < 10) {
+          standIn = '0' + standIn
+        }
+        return standIn;
+        }
+    }
+    setInterval(clock, 1000);
+    function setDate() {
+      var date = (new Date())
+      document.querySelectorAll('.dato')[0].innerHTML =  Intl.DateTimeFormat("da-dk").format(date)
+    }
+    setInterval(setDate, 5000)
+  })
 head
   meta(charset='UTF-8')
-  meta(http-equiv='X-UA-Compatible' content='IE=edge')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='refresh', content='30')
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
   script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
-  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF' crossorigin='anonymous')
-  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous')
-  link(rel='stylesheet' href='//fonts.googleapis.com/css?family=Poppins')
-  link(rel='stylesheet' href='style2.css')
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF', crossorigin='anonymous')
+  link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.0/css/all.css', integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ', crossorigin='anonymous')
+  link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Poppins')
+  style
+    include ./css/style2.css
   title info screen BS
-#AARHUSTECH.AARHUSTECH AARHUSTECH
-#Klokken.klokken 15:30
-#dato.dato 08 Oktober 2021
-#aktiviter.aktiviter aktiviter
-.(class='netværksstatus' id='netværksstatus') Netv&aelig;rksstatus
-#info.info
-  | Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-  | classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
-  | Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem
-  | Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable
-  | source.Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of
-  | Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during
-  | the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section
-  | 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.
-  | Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact
-  | original form, accompanied by English versions from the 1914 translation by H. Rackham.
-.kontakt
-  .instruktoer
-    p
-      | Ulrich kan kontaktes p&aring;: 
+.clock.klokken INDL&AElig;SER
+#AARHUSTECH.AARHUSTECH AARHUSTECH SKP
+#dato.dato INDL&AElig;SER
+#aktiviteter.aktiviteter Aktiviteter
+p#netvaerksstatus.netvaerksstatus Netv&aelig;rksstatus
+.center
+  // div til de to bokse
+  .info
+    .info_titeltext
+    .info_text
+    .info_titeltext
+    .info_text
+    .info_titeltext
+    .info_text
+  .kontakt
+    // div til den røde info boks
+    .instruktoer
+      p
+        | Ulrich kan kontaktes p&aring;: 
+        br
+        br
+        |            mail: 
+        a(href='') umf@aarhustech.dk
+        br
+        |             Telefon: 
+        a(href='') 61987304
+      br
+      p
+        | Karsten kan kontaktes p&aring;: 
+        br
+        br
+        |           mail: 
+        a(href='') krs@aarhustech.dk
+        br
+        |             Telefon: 
+        a(href='') 22234565
+      br
+      p
+        | Simon kan kontaktes p&aring;: 
+        br
+        br
+        |             mail: 
+        a(href='') sas@aarhustech.dk
+        br
+        |             Telefon: 
+        a(href='') 22234166
+    .skp_website
+      | Alt hvad du skal vide om skp finder du her: 
       br
       br
-      |            mail: 
-      a(href='') umf@aarhustech.dk
-      br
-      |            Telefon: 
-      a(href='') 61987304
-    br
-    p
-      | Karsten kan kontaktes p&aring;: 
+      div(style=' text-decoration: underline;')  www.ats-skpdatait.dk 
       br
       br
-      |             mail: 
-      a(href='') krs@aarhustech.dk
       br
-      |             Telefon: 
-      a(href='') 22234565
-    br
-    p
-      | Simon kan kontaktes p&aring;: 
+      |             Hvis du mangler noget bestiller du det her: 
       br
       br
-      |             mail: 
-      a(href='') sas@aarhustech.dk
-      br
-      |             Telefon: 
-      a(href='') 22234166
-  .skp_website
-    | Alt hvad du skal vide om skp finder du her: 
-    br
-    br
-    div(style=' text-decoration: underline;')  www.ats-skpdatait.dk 
-    br
-    br
-    br
-    |             Hvis du mangler noget bestiller du det her: 
-    br
-    br
-    div(style=' text-decoration: underline;')  www.inventar.ats-skpdatait.dk
+      div(style=' text-decoration: underline;')  www.inventar.ats-skpdatait.dk
