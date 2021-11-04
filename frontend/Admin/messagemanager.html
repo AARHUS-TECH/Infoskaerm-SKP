@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin panel</title>
+  </head>
+  <body>
+    <link rel="stylesheet" href="textstyle.css">
+    
+    <div class="pb-2 mt-4 mb-2 border-bottom header">
+      AARHUSTECH
+    </div>
+    
+    <div class="container_msg">
+    <div class="center">
+      <h2 id="msgtitle">Post message</h2>
+      <form action="/action_page.php">
+      <p id="ttitle" for="fname">Title:</label> 
+      <textarea type="text" id="title" name="title"></textarea><br><br>
+      <label id="tmessage" for="lname">Message:</label>
+      <textarea type="text" id="msg" name="msg"></textarea><br><br>
+        
+
+      <input id="postmsg" type="submit" value="post message">
+      <input id="editmsg" type="submit" value="edit message">
+      <input id="delmsg" type="submit" value="delete message">
+      <div class="container_savedmsg" id="savedmsg"></div>
+      </form>
+    </div>
+    <div class="startbox"  >
+      <label  for="start">Start dato:</label>
+      <input type="date" id="startdato" name="msg_startdato" required pattern="\d{4}-\d{2}-\d{2}">
+      
+    
+        <label for="end" class="endbox">Slut dato:</label>
+        <input type="date" id="enddato" name="msg_enddato" required pattern="\d{4}-\d{2}-\d{2}">
+    
+    </div>
+    
+    
+    
+    
+  </div>
+
+
+  </body>
+</html>
