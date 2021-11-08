@@ -61,20 +61,22 @@ body {
 
 .info_titeltext {
     background-color: lightgrey;
-    padding: 5px 20px 0px;
+    padding: .4vh 20px 0px;
     font-size: 17px;
-    left: 30px;
     margin-bottom: 2px;
     margin-top: 10px;
     height: 30px;
     width: 640px;
 }
 
+.info_text p{
+  
+}
+
 .info_text {
     background-color: lightgrey;
-    padding: 10px 20px 0px;
+    padding: 5px 20px 0px;
     font-size: 12px;
-    left: 30px;
     height: 70px;
     width: 640px;
 }
@@ -102,6 +104,7 @@ body {
     font-size: 20px;
     line-height: 1px;
 }
+
 .instruktoer {
     color: #ffff;
     padding: 15px 30px 0px;
@@ -115,4 +118,21 @@ body {
     color: #ffff;
     padding-left: 250px;
     bottom: 300px;
+}
+
+.dateHolder {
+    display: flex;
+    white-space: nowrap;
+    padding-bottom: 100px;
+}
+
+.dateHolder .startdateholder {
+    font-size: 10px;
+    color: grey;
+}
+
+.dateHolder .enddateholder {
+    margin-left: 81%;
+    color: grey;
+    font-size: 10px;
 }
