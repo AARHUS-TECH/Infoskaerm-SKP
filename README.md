@@ -59,5 +59,5 @@ OS: Raspberry OS
 # TO DO:
 
 - [ ] Add capability for more than 3 news (replace existing in order)
-- [ ] Implement startDate and endDate to the database
+- [x] Implement startDate and endDate to the database
 - [ ] Delete after endDate
