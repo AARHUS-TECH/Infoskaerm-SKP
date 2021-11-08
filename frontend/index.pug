@@ -1,74 +1,57 @@
 doctype html
 script.
-  //tid og dato//
   document.addEventListener("DOMContentLoaded", function(event) {
-  //if( == false)
-  // document.getElementById("netvaerksstatus").style.color = "red";
-  // else
-  // document.getElementById("netvaerksstatus").style.color = "green";
-  function clock() {
-  var time = new Date(),
-  hours = time.getHours(),
-  minutes = time.getMinutes()
-  document.querySelectorAll('.clock')[0].innerHTML = harold(hours) + ":" + harold(minutes);
-  //var titleText = ``.split(":-:,")
-  //var bodyText = ``.split(":-:,")
-  var pos = titleText.length
-  //Header
-  /*document.querySelectorAll(".info_titeltext")[0].innerHTML = `<p>${titleText[pos-1].replace(":-:", "")}</p>`
-  document.querySelectorAll(".info_titeltext")[1].innerHTML = `<p>${titleText[pos-2].replace(":-:", "")}</p>`
-  document.querySelectorAll(".info_titeltext")[2].innerHTML = `<p>${titleText[pos-3].replace(":-:", "")}</p>`
-  */
-  //Body
-  /*document.querySelectorAll(".info_text")[0].innerHTML = `<p>${bodyText[pos-1].replace(":-:","")}</p>`
-  document.querySelectorAll(".info_text")[1].innerHTML = `<p>${bodyText[pos-2].replace(":-:","")}</p>`
-  document.querySelectorAll(".info_text")[2].innerHTML = `<p>${bodyText[pos-3].replace(":-:","").replace("undefined", "")}</p>`
-  */
-  function harold(standIn) {
-  if (standIn < 10) {
-  standIn = '0' + standIn
-  }
-  return standIn;
-  }
-  }
-  setInterval(clock, 1000);
-  function setDate() {
-  var date = (new Date())
-  document.querySelectorAll('.dato')[0].innerHTML =  Intl.DateTimeFormat("da-dk").format(date)
-  }
-  setInterval(setDate, 5000)
+    if (#{netstatus} == false) {
+      document.getElementById("netvaerksstatus").style.display = "block"
+      document.getElementById("netvaerksstatus").style.color = "red";
+    }
+    else
+      document.getElementById("netvaerksstatus").style.display = "none"
+
+    sessionStorage.setItem("titleText", `#{getNewsTitle}`)
+    sessionStorage.setItem("bodyText", `#{getNewsBody}`)
+    sessionStorage.setItem("startText", `#{getNewsStart}`)
+    sessionStorage.setItem("endText", `#{getNewsEnd}`)
   })
+
+
+
+
 head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible', content='IE=edge')
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
-  meta(http-equiv='refresh', content='30')
+  meta(http-equiv='refresh', content='10')
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
   script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
+  script(src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js")
+  script(type='text/javascript' defer src='/frontend/js/index.js')
   link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF', crossorigin='anonymous')
   link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.0/css/all.css', integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ', crossorigin='anonymous')
   link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Poppins')
-  link(rel='stylesheet', href='style.css')
+  style
+    include ./css/style.css
   title info screen
-.clock.klokken INDL&AElig;SER
-#AARHUSTECH.AARHUSTECH AARHUSTECH SKP
-#dato.dato INDL&AElig;SER
+
+div.clock.klokken 
+#AARHUSTECH.AARHUSTECH AARHUS TECH SKP
+#dato.dato 
 #aktiviteter.aktiviteter Aktiviteter
 p#netvaerksstatus.netvaerksstatus Netv&aelig;rksstatus
-.center
+div.center
   // div til de to bokse
-  .info
-    .info_titeltext hej
-    .info_text hej
-    .info_titeltext
-    .info_text
-    .info_titeltext
-    .info_text
-  .kontakt
+  div.info
+    div.info_titeltext
+    div.info_text
+    div.info_titeltext
+    div.info_text
+    div.info_titeltext
+    div.info_text
+  div.kontakt
     // div til den røde info boks
-    .instruktoer
-      img.billeder(src='Assets/Ulrich.png')
+    div.instruktoer
+      img.billeder(src='images/Ulrich.png')
       p
       p.instruktoer_title  Ulrich kan kontaktes p&aring;:
       |           mail: umf@aarhustech.dk
@@ -76,7 +59,7 @@ p#netvaerksstatus.netvaerksstatus Netv&aelig;rksstatus
       |            Telefon: 61987304
       p
       br
-      img.billeder(src='Assets/Karsten.png')
+      img.billeder(src='images/Karsten.png')
       p
       p.instruktoer_title Karsten kan kontaktes p&aring;:
       |         mail: krs@aarhustech.dk
@@ -84,15 +67,10 @@ p#netvaerksstatus.netvaerksstatus Netv&aelig;rksstatus
       |             Telefon: 22234565
       p
       br
-      img.billeder(src='Assets/Simon.png')
+      img.billeder(src='images/Simon.png')
       p
       p.instruktoer_title Simon kan kontaktes p&aring;:
       |           mail: sas@aarhustech.dk
       br
       |             Telefon: 22234166
       p
-    //
-      <div class="skp_website">Alt hvad du skal vide om skp finder du her: <br><br>
-      <div> www.ats-skpdatait.dk </div><br><br><br>            Hvis du mangler noget bestiller du det her: <br><br>
-      <div> www.inventar.ats-skpdatait.dk</div>
-      </div>
