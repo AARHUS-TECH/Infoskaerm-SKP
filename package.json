@@ -1,14 +1,14 @@
 {
-  "name": "website",
-  "version": "1.0.0",
+  "name": "SKPInfoSkaerm",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "sudo service mariadb start & nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Rasmus, Kasper, Bastian, Eray",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cluster": "^0.7.7",
