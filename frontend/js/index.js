@@ -38,12 +38,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		function makeNews(boxnumber, position) {
 			// Header
 			if (boxnumber < 3) {
+				//if (endText[pos - position])
 				document.querySelectorAll(".info_titeltext")[boxnumber].innerHTML = `<p>${titleText[pos-position].replace(":-:", "")}</p>` // Replaces Title
 				// Body
-				document.querySelectorAll(".info_text")[boxnumber].innerHTML = `<p>${bodyText[pos-position].replace(":-:","")}</p><div class="dateHolder"><div class="startdateholder"></div><div class="enddateholder"></div>`
+				document.querySelectorAll(".info_text")[boxnumber].innerHTML = `<p>${bodyText[pos-position].replace(":-:","")}</p><div class="startdateholder"></div><div class="enddateholder"></div>`
 				if (startText[pos - position] != "null" || endText[pos - position] != "null") {
-					document.querySelectorAll(".startdateholder")[boxnumber].innerHTML = `<p>${startText[pos-position].replace(":-:","").substring(3,15)}</p>`
-					document.querySelectorAll(".enddateholder")[boxnumber].innerHTML = `<p>${endText[pos-position].replace(":-:","").substring(3,15)}</p></div>`
+					document.querySelectorAll(".startdateholder")[boxnumber].innerHTML = `${startText[pos-position].replace(":-:","").substring(3,15)}`
+					document.querySelectorAll(".enddateholder")[boxnumber].innerHTML = `${endText[pos-position].replace(":-:","").substring(3,15)}`
 				}
 			}
 		}
