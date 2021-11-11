@@ -1,201 +1,66 @@
-const con = require('./lib/connection.js'),
-	express = require('express'),
-	isReachable = require('is-reachable'),
-	sess = require('express-session'),
-	cookieParser = require("cookie-parser"),
-	encoder = express.urlencoded({
-		extended: true
-	}),
-	path = require('path'),
-	redis = require('redis'),
-	redisStore = require('connect-redis')(sess),
-	client = redis.createClient();
+document.addEventListener("DOMContentLoaded", function(event) {
 
+	setDate()
 
-//Hosting Port
-const PORT = 3000
-
-// Network Display bool
-var status = "net1"
-var net1 = false
-//var net2 = false
-// login security
-var verificationFailed = false
-
-// NIX PILLE
-loadSite()
-setInterval(loadSite, 10000) // 10000ms, website live reloads every 10 seconds
-
-const app = express()
-var personList = []
-
-app.use(sess({
-	secret: 'WeNeedARaise',
-	store: new redisStore({
-		host: 'localhost',
-		port: 6379,
-		client: client,
-		ttl: 260
-	}),
-	resave: true,
-	saveUninitialized: true,
-	cookie: {
-		maxAge: 600000
+	function setDate() {
+		var date = (new Date())
+		document.getElementById('dato').innerHTML = Intl.DateTimeFormat("da-dk").format(date)
 	}
-}))
+	setInterval(setDate, 1000)
 
-var db = con.getConnection()
-var titleText = con.getNewsTitle()
-var bodyText = con.getNewsBody()
+	clock()
 
-// Needed to update news on refresh, can't be used in an async function
-function getInfo() {
-	titleText = con.getNewsTitle()
-	bodyText = con.getNewsBody()
-	startText = con.getNewsStartDate()
-	endText = con.getNewsEndDate()
-}
+	function clock() {
+		var time = new Date(),
+			hours = time.getHours(),
+			minutes = time.getMinutes()
+		document.querySelectorAll('.clock')[0].innerHTML = harold(hours) + ":" + harold(minutes);
 
-async function loadSite() {
-	// Network Check
-	net1 = await isReachable('217.116.222.48') // LAV FLERE HVIS I FÅR FLERE IP'ER
-	// view engine + public folder
-	app.set("views", "frontend")
-	app.set('view engine', 'pug')
-	app.use(express.json())
-	app.use(express.urlencoded({
-		extended: true
-	}));
-	app.use(express.static('Admin'));
-	app.use('/images', express.static("./frontend/images"));
-	app.use('/frontend/js', express.static(path.join(__dirname, '/frontend/js')));
-	// net2 = await isReachable('217.116.222.48') // an extra connection
+		// Tager info fra pug fil i sessionen
+		var titleText = sessionStorage.getItem("titleText")
+		var bodyText = sessionStorage.getItem("bodyText")
+		var startText = sessionStorage.getItem("startText")
+		var endText = sessionStorage.getItem("endText")
 
-	// Index site
-	getInfo() // Update news
-	app.get('/', function(req, res) {
-		res.render('index.pug', {
-			// sends net1 bool into the variable netstatus on index.pug
-			netstatus: net1,
-			getNewsTitle: titleText,
-			getNewsBody: bodyText,
-			getNewsStart: startText,
-			getNewsEnd: endText
-		})
-	})
 
-	//Login site
-	app.get("/login", function(req, res) {
-		res.render('login.pug', {
-			verifyFail: req.session.verificationFailed // Transfer check over to pug file
-		})
-	})
+		// Splliter ved :-:, for at få de korrekte values i en array
+		titleText = titleText.split(":-:,")
+		bodyText = bodyText.split(":-:,")
+		startText = startText.split(":-:,")
+		endText = endText.split(":-:,")
 
-	// Login system authentication
-	app.post("/authenticate", encoder, function(req, res) {
-		var Id = req.body.id
-		var password = req.body.password
-		db.query('SELECT * FROM users', (err, rows) => {
-			db.query("SELECT * FROM users WHERE Id = ? AND password = ?", [Id, password], function(error, results, fields) {
-				if (err) throw err;
-				if (results.length > 0 && rows[Id].status == "superuser") {
-					req.session.key = Id;
-					res.redirect("Admin/dashboard")
-				} else {
-					req.session.verificationFailed = true // Check to make sure fail message is shown
-					res.redirect("/login")
+		// Keeps track of position
+		var pos = titleText.length
+
+		var dateThingy = 0
+
+		// Make a news box
+		function makeNews(boxnumber, position) {
+			// Header
+			if (boxnumber < 3) {
+				//if (endText[pos - position])
+				document.querySelectorAll(".info_titeltext")[boxnumber].innerHTML = `<p>${titleText[pos-position].replace(":-:", "")}</p>` // Replaces Title
+				// Body
+				document.querySelectorAll(".info_text")[boxnumber].innerHTML = `<p>${bodyText[pos-position].replace(":-:","")}</p><div class="startdateholder"></div><div class="enddateholder"></div>`
+				if (startText[pos - position] != "null" || endText[pos - position] != "null") {
+					document.querySelectorAll(".startdateholder")[boxnumber].innerHTML = `${startText[pos-position].replace(":-:","").substring(3,15)}`
+					document.querySelectorAll(".enddateholder")[boxnumber].innerHTML = `${endText[pos-position].replace(":-:","").substring(3,15)}`
 				}
-			})
-		});
-
-	})
-
-	// admin panel
-	app.get('/Admin/dashboard', function(req, res) {
-		let session = req.session
-		if (session.key) {
-			res.render('Admin/dashboard.pug'), {
-				userID: session.key
 			}
-		} else {
-			req.session.verificationFailed = true // Check to make sure fail message is shown
-			res.redirect("/login")
 		}
-	})
 
-	app.get('/Admin/database', function(req, res) {
-		let session = req.session
-		if (session.key) {
-			res.render('Admin/database.pug'), {
-				userID: session.key
+		// box 1
+		for (var i = 0; i <= bodyText.length; i++) {
+			makeNews(i, i + 1)
+		}
+
+		function harold(standIn) {
+			if (standIn < 10) {
+				standIn = '0' + standIn
 			}
-		} else {
-			req.session.verificationFailed = true // Check to make sure fail message is shown
-			res.redirect("/login")
+			return standIn;
 		}
-	})
-
-	// admin panel
-	app.get('/Admin/messagemanager.pug', function(req, res) {
-		let session = req.session
-		if (session.key) {
-			res.render('Admin/messagemanager.pug')
-		} else {
-			req.session.verificationFailed = true // Check to make sure fail message is shown
-			res.redirect("/login")
-		}
-	})
-
-	app.post('/postnews', function(req, res) {
-		var title = req.body.title
-		var body = req.body.msg
-		var start = req.body.msg_startdato
-		var end = req.body.msg_enddato
-		if (start != null || end != null)
-			con.addNews(title.toString(), body.toString(), `"${start}"`, `"${end}"`)
-		else {
-			con.addNews(title.toString(), body.toString(), `null`, `null`)
-
-		}
-		res.redirect("Admin/dashboard")
-	})
-
-	app.get('/Admin/users', function(req, res) {
-		let session = req.session
-		if (session.key) {
-			res.render('Admin/users.pug'), {
-				userID: session.key
-			}
-		} else {
-			req.session.verificationFailed = true // Check to make sure fail message is shown
-			res.redirect("/login")
-		}
-	})
-
-	app.post("/logout", function(req, res) {
-		req.session.destroy(function(err) {
-			res.redirect('/');
-		});
-	})
-
-	app.post("/createUser", function(req, res) {
-		fname = req.body.fornavn
-		mname = req.body.mellemnavn
-		sname = req.body.efternavn
-		rname = req.body.role
-
-		if (mname == "")
-			mname = null
-		if (rname != "user" || rname != "superuser")
-			rname = "user"
-
-		con.addUser(fname, mname, sname, rname, null)
-
-		res.redirect("Admin/users?added=true")
-	})
-}
-
-// Host siden
-app.listen(PORT, ["0.0.0.0", "localhost"], () => {
-	console.log("Siden kan nu loades!")
+	}
+	// Infinite loop
+	setInterval(clock, 1000);
 })
