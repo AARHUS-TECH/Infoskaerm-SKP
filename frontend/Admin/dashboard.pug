@@ -14,22 +14,21 @@ html(lang='en')
       .nav-items
         .admin-profile
           .icons
-            a(href='index.pug')
-              img(src='user.png' alt='admin')
+            img(src='user.png' alt='admin')
           span
-            a(href='index.pug') Admin
+            Admin
         .item-list
           .icons
             a(href='dashboard.pug')
               i.fas.fa-tachometer-alt
           span
-            a(href='dashboard.pug') Dashboard
+            a(href='dashboard') Dashboard
         .item-list
           .icons
             a(href='database.pug')
               i.fas.fa-wallet
           span
-            a(href='database.pug') Database
+            a(href='database') Database
         .logout
           .icons
             a(href='logout.pug')
@@ -53,8 +52,8 @@ html(lang='en')
           function loadDoc() {
           const xhttp = new XMLHttpRequest();
           xhttp.onload = function() {
-          document.getElementById("msgman").innerHTML =
-          this.responseText;
+            document.getElementById("msgman").innerHTML =
+            this.responseText;
           }
           xhttp.open("GET", "messagemanager.pug");
           xhttp.send();
