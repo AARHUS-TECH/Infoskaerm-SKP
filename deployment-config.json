@@ -1,0 +1,9 @@
+{
+    "type": "ftp",
+    "host": "192.168.160.249",
+    "username": "pi",
+    "password": "raspberry",
+    "port": 21,
+    "remotePath": "files/",
+    "uploadOnSave": true
+}

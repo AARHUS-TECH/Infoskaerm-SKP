@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-
 	setDate()
 
 	function setDate() {
-		var date = (new Date())
-		document.getElementById('dato').innerHTML = Intl.DateTimeFormat("da-dk").format(date)
+		this.date = (new Date())
+		document.getElementById('dato').innerHTML = Intl.DateTimeFormat("da-dk").format(this.date)
 	}
 	setInterval(setDate, 1000)
 
@@ -16,6 +15,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			minutes = time.getMinutes()
 		document.querySelectorAll('.clock')[0].innerHTML = harold(hours) + ":" + harold(minutes);
 
+		function harold(standIn) {
+			if (standIn < 10) {
+				standIn = '0' + standIn
+			}
+			return standIn;
+		}
+	}
+	// Infinite loop
+	setInterval(clock, 1000);
+
+	function news() {
 		// Tager info fra pug fil i sessionen
 		var titleText = sessionStorage.getItem("titleText")
 		var bodyText = sessionStorage.getItem("bodyText")
@@ -32,35 +42,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		// Keeps track of position
 		var pos = titleText.length
 
-		var dateThingy = 0
-
-		// Make a news box
-		function makeNews(boxnumber, position) {
-			// Header
-			if (boxnumber < 3) {
-				//if (endText[pos - position])
-				document.querySelectorAll(".info_titeltext")[boxnumber].innerHTML = `<p>${titleText[pos-position].replace(":-:", "")}</p>` // Replaces Title
-				// Body
-				document.querySelectorAll(".info_text")[boxnumber].innerHTML = `<p>${bodyText[pos-position].replace(":-:","")}</p><div class="startdateholder"></div><div class="enddateholder"></div>`
-				if (startText[pos - position] != "null" || endText[pos - position] != "null") {
-					document.querySelectorAll(".startdateholder")[boxnumber].innerHTML = `${startText[pos-position].replace(":-:","").substring(3,15)}`
-					document.querySelectorAll(".enddateholder")[boxnumber].innerHTML = `${endText[pos-position].replace(":-:","").substring(3,15)}`
-				}
-			}
-		}
-
-		// box 1
+		// boxes
 		for (var i = 0; i <= bodyText.length; i++) {
 			makeNews(i, i + 1)
 		}
 
-		function harold(standIn) {
-			if (standIn < 10) {
-				standIn = '0' + standIn
+		// Make a news box
+		function makeNews(boxnumber, position) {
+			this.boxnumber = boxnumber
+			if (this.boxnumber < 3) {
+				document.querySelectorAll(".info_titeltext")[this.boxnumber].innerHTML = `<p>${titleText[pos-position].replace(":-:", "")}</p>` // Replaces Title
+				document.querySelectorAll(".info_text")[this.boxnumber].innerHTML = `<p>${bodyText[pos - position].replace(":-:","")}</p><div class="startdateholder"></div><div class="enddateholder"></div>`
+				document.querySelectorAll(".startdateholder")[this.boxnumber].innerHTML = `${startText[pos - position].replace(":-:","").substring(4,15)}`
+				document.querySelectorAll(".enddateholder")[this.boxnumber].innerHTML = `${endText[pos - position].replace(":-:","").substring(4,15)}`
 			}
-			return standIn;
 		}
 	}
-	// Infinite loop
-	setInterval(clock, 1000);
+	news()
+	setInterval(news, 5000)
 })

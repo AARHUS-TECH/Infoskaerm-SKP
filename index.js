@@ -71,6 +71,9 @@ async function loadSite() {
 	app.use('/frontend/js', express.static(path.join(__dirname, '/frontend/js')));
 	// net2 = await isReachable('217.116.222.48') // an extra connection
 
+	// Deletes old dates from DB
+	con.removeNews();
+
 	// Index site
 	getInfo() // Update news
 	app.get('/', function(req, res) {

@@ -32,8 +32,8 @@
     float:left;
     margin: 0;
     padding: 0;
-
-    font-family: 'Raleway', sans-serif;
+    z-index: 3;
+    font-family: 'poppins', sans-serif;
 }
 
 .toggle-menu {

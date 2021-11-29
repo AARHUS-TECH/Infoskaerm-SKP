@@ -1,92 +1,175 @@
 body {
-  max-width: 100%;
-  margin: 0px;
-  padding: 0xp;
+ max-width: 100%;
+ margin: 0px;
+ padding: 0xp;
 }
-
+ 
+ 
+textarea {
+ margin: 9%;
+ resize: none;
+}
+ 
 .container_msg {
-  background-color: #d7d7d7;
-  align-content: center;
-  height: 450px;
-  width: 560px;
-  float: center;
-  margin-left: 543px;
-  margin-top: 20px;
-  z-index: 3;
-
+ position: absolute;
+ background-color: #d7d7d7;
+ align-content: center;
+ height: 500px;
+ width: 620px;
+ top: 50%;
+ left: 50%;
+ /* bring your own prefixes */
+ transform: translate(-50%, -50%);
+ /*margin-top: clac(--header_heigtht)*/
+ margin-top: 10%:;
 }
-
+ 
 #msgtitle {
-  float: bottom;
-  padding: 10px;
+ padding: 10px;
+ margin: 7%;
+ 
 }
-
+ 
 #msg {
-  display: block;
-  width: 500px;
-  height: 150px;
-  text-align: top;
-  resize: none;
+ display: block;
+ width: 500px;
+ height: 150px;
+ text-align: top;
+ resize: none;
 }
-
+ 
 .startbox {
-  position: relative;
-  top: -73px;
-  z-index: 5;
+ margin-left: 8.5%;
 }
-
+ 
 .endbox {
-margin-left: 12%;
+ margin-left: 8.5%;
 }
-
+ 
 #title {
-width: 500px;
-height: 20px;
-display: block;
-resize: none;
+ width: 500px;
+ height: 20px;
+ display: block;
+ resize: none;
+ margin-bottom: 2%;
 }
-
+ 
 #postmsg {
-  width: 160px;
-  float: relative;
-  margin: 4px;
+ width: 160px;
+ margin-left: 5%;
+ float: left;
 }
-
-#editmsg{
-  width: 160px;
-  float: relative;
-  margin: 4px;
+ 
+#editmsg {
+ width: 160px;
+ float: left;
+ margin-left: 5%;
 }
-
+ 
 #delmsg {
-  width: 160px;
-  float: relative;
-  margin: 4px;
+ width: 160px;
+ float: left;
+ margin-left: 5%;
 }
-
+ 
 #ttitle {
-  margin: 0px;
+     margin-top: 8%;
+    position: fixed;
+    margin-left: -14%;
 }
-
+ 
 #tmessage {
-  margin: 0px;
+ position: absolute;
+ margin: 9%;
+ margin-top: 5%;
 }
-
+ 
 .header {
-  font-family: 'poppins', serif;
-  font-size: 60px;
-  background-color: #e62613;
-  background: linear-gradient(to bottom, #e62613, #a81b0e);
-  color: white;
-  height: 80px;
-  width: relative;
-  padding: 10px;
-  text-align: center;
+ font-family: "poppins", serif;
+ font-size: 60px;
+ background-color: #e62613;
+ background: linear-gradient(to bottom, #e62613, #a81b0e);
+ color: white;
+ height: calc($header-heigtht);
+ width: relative;
+ padding: 10px;
+ text-align: center;
+ position: absolute;
+ width:100%;
+ z-index:2;
+ --header_heigtht: 80px;
 }
-
+ 
 .center {
-position: absolute;
-left: 35%;
-padding: 10px;
-z-index: 2;
+ position: absolute;
+ left: 35%;
+ padding: 10px;
+ z-index: 2;
 }
+ 
+@media only screen and (min-width: 1440px) {
+ body {
+   background-color: #e62613;
+ }
+ .container_msg {
+   min-width: 826px;
+   min-height: 706px;
+   margin-top: 5vh;
+ }
+ #msg {
+   width: 666px;
+   height: 200px;
+ }
+ #title {
+   width: 666px;
+   height: 26px;
+   display: block;
+   resize: none;
+ }
+ 
+ #postmsg {
+   width: 213px;
+   height: 28px;
+   font-size: 17.777px;
+ }
+ 
+ #editmsg {
+   width: 213px;
+   height: 28px;
+   font-size: 17.777px;
+ }
+ #delmsg {
+   width: 213px;
+   height: 28px;
+   font-size: 17.777px;
+ }
+ 
+ #msgtitle {
+   font-size: 32px;
+ }
+ 
+ #ttitle {
+   position: absolute;
+   margin: 9%;
+   margin-top: -4%;
+   font-size: 21px;
+ }
+ 
+ #tmessage {
+   position: absolute;
+   margin: 9%;
+   margin-top: -4%;
+   font-size: 21px;
+ }
+ label {
+   font-size: 21px;
+ }
+ #startdato {
+   font-size: 17.777px;
+ }
+ #enddato {
+   font-size: 17.777px;
+ }
+}
+ 
+
