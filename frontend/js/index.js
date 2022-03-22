@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
+ 
+	
 	setDate()
 
 	function setDate() {
@@ -25,39 +27,65 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	// Infinite loop
 	setInterval(clock, 1000);
 
-	function news() {
-		// Tager info fra pug fil i sessionen
-		var titleText = sessionStorage.getItem("titleText")
-		var bodyText = sessionStorage.getItem("bodyText")
-		var startText = sessionStorage.getItem("startText")
-		var endText = sessionStorage.getItem("endText")
+	
+	function LoadNews() { 
+		var xhttp = new XMLHttpRequest();  // XMLHttpRequest gives typeError, but its has noget run in to any problems
+		xhttp.onload = function() {
+		 	 const svar = xhttp.responseText;
+			 const opslagdata = JSON.parse(svar);
+			 const opslag = opslagdata.news
+				
+			 	for(var i = 0; i <= opslag.length; i++) {
+					const titleText = opslag[i].header
+					const bodyText = opslag[i].body
+					const startText = opslag[i].startdate
+					const endText = opslag[i].enddate
+    				
+					function rotateTerm() { // using jquerry to make it fade make it change to the next set of data
+						var headernumber = $(".info_titeltext").data("header") || 0;
+						var bodynumber = $(".info_text").data("body") || 0;
+						var startnumber = $(".startdateholder").data("startdate") || 0;
+						var endnumber = $(".enddateholder").data("enddate") || 0;
+    					$(".info_titeltext")
+      						.data("header", headernumber == opslag.length - 1 ? 0 : headernumber + 1)
+							.html(opslag[headernumber].header)
+      						.fadeIn(500)	
+      						.delay(20000) 
+      						.fadeOut(500);
 
+						$(".info_text")
+      						.data("body", bodynumber == opslag.length - 1 ? 0 : bodynumber + 1)
+							.html(opslag[bodynumber].body)
+      						.fadeIn(500)	
+      						.delay(20000) 
+      						.fadeOut(500);
 
-		// Splliter ved :-:, for at få de korrekte values i en array
-		titleText = titleText.split(":-:,")
-		bodyText = bodyText.split(":-:,")
-		startText = startText.split(":-:,")
-		endText = endText.split(":-:,")
+						$(".startdateholder")
+      						.data("startdate", startnumber == opslag.length - 1 ? 0 : startnumber + 1)
+							.html(opslag[startnumber].startdate)
+      						.fadeIn(500)	
+      						.delay(20000) 
+      						.fadeOut(500);
 
-		// Keeps track of position
-		var pos = titleText.length
+						$(".enddateholder")
+      						.data("enddate", endnumber == opslag.length - 1 ? 0 : endnumber + 1)
+							.html(opslag[endnumber].enddate)
+      						.fadeIn(500)	
+      						.delay(20000) 
+      						.fadeOut(500, rotateTerm);						
+  					}
+  					rotateTerm();
+			
+					document.querySelector(".info_titeltext").innerHTML = titleText
+					document.querySelector(".info_text").innerHTML = bodyText
+					document.querySelector(".startdateholder").innerHTML = startText
+					document.querySelector(".enddateholder").innerHTML = endText
+				}
+				
 
-		// boxes
-		for (var i = 0; i <= bodyText.length; i++) {
-			makeNews(i, i + 1)
-		}
-
-		// Make a news box
-		function makeNews(boxnumber, position) {
-			this.boxnumber = boxnumber
-			if (this.boxnumber < 3) {
-				document.querySelectorAll(".info_titeltext")[this.boxnumber].innerHTML = `<p>${titleText[pos-position].replace(":-:", "")}</p>` // Replaces Title
-				document.querySelectorAll(".info_text")[this.boxnumber].innerHTML = `<p>${bodyText[pos - position].replace(":-:","")}</p><div class="startdateholder"></div><div class="enddateholder"></div>`
-				document.querySelectorAll(".startdateholder")[this.boxnumber].innerHTML = `${startText[pos - position].replace(":-:","").substring(4,15)}`
-				document.querySelectorAll(".enddateholder")[this.boxnumber].innerHTML = `${endText[pos - position].replace(":-:","").substring(4,15)}`
-			}
-		}
-	}
-	news()
-	setInterval(news, 5000)
+  		};
+		xhttp.open("GET", "http://localhost:3000/getMyJSON", true);
+		xhttp.send();
+ 	}
+	LoadNews();
 })
