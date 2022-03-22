@@ -1,91 +1,213 @@
-document.addEventListener("DOMContentLoaded", function(event) {
- 
-	
-	setDate()
+const con = require('./lib/connection.js'),
+	express = require('express'),
+	isReachable = require('is-reachable'),
+	sess = require('express-session'),
+	cookieParser = require("cookie-parser"),
+	encoder = express.urlencoded({
+		extended: true
+	}),
+	path = require('path'),
+	redis = require('redis'),
+	redisStore = require('connect-redis')(sess),
+	client = redis.createClient();
 
-	function setDate() {
-		this.date = (new Date())
-		document.getElementById('dato').innerHTML = Intl.DateTimeFormat("da-dk").format(this.date)
+
+//Hosting Port
+const PORT = 3000
+
+// Network Display bool
+var status = "net1"
+var net1 = false
+//var net2 = false
+// login security
+var verificationFailed = false
+
+// NIX PILLE
+loadSite()
+setInterval(loadSite, 10000) // 10000ms, website live reloads every 10 seconds
+
+
+
+const app = express()
+
+app.get('/getMyJSON', function(req, res){ // data træk til opslagene med json og ajax
+	var opslagdata = "*";
+  db.query("SELECT * FROM news ORDER BY Startdate ASC", (err, rows,) => {
+    if (err) console.log(err); 
+    opslagdata = '{';
+    opslagdata += '"news":[';
+      for (var i = 0; i < rows.length; i++) {   
+        opslagdata += '{';
+        opslagdata += '"header" : "'+rows[i].Header+'",';
+        opslagdata += '"body" : "'+rows[i].Body+'",';
+        opslagdata += '"startdate" : "'+rows[i].Startdate+'",';
+        opslagdata += '"enddate" : "'+rows[i].Enddate+'"';
+        opslagdata += '},';
+      };
+	  opslagdata = opslagdata.substring(0,(opslagdata.length)-1)
+      opslagdata += ']}';   
+	  res.send(opslagdata);
+  });
+})
+
+
+var personList = []
+
+app.use(sess({
+	secret: 'WeNeedARaise',
+	store: new redisStore({
+		host: 'localhost',
+		port: 6379,
+		client: client,
+		ttl: 260
+	}),
+	resave: true,
+	saveUninitialized: true,
+	cookie: {
+		maxAge: 600000
 	}
-	setInterval(setDate, 1000)
+}))
 
-	clock()
+var db = con.getConnection()
 
-	function clock() {
-		var time = new Date(),
-			hours = time.getHours(),
-			minutes = time.getMinutes()
-		document.querySelectorAll('.clock')[0].innerHTML = harold(hours) + ":" + harold(minutes);
+async function loadSite() {
+	// Network Check
+	net1 = await isReachable('217.116.222.48') // LAV FLERE HVIS I FÅR FLERE IP'ER
+	// view engine + public folder
+	app.set("views", "frontend")
+	app.set('view engine', 'pug')
+	app.use(express.json())
+	app.use(express.urlencoded({
+		extended: true
+	}));
+	app.use(express.static('Admin'));
+	app.use('/images', express.static("./frontend/images"));
+	app.use('/frontend/js', express.static(path.join(__dirname, '/frontend/js')));
+	// net2 = await isReachable('217.116.222.48') // an extra connection
 
-		function harold(standIn) {
-			if (standIn < 10) {
-				standIn = '0' + standIn
-			}
-			return standIn;
-		}
-	}
-	// Infinite loop
-	setInterval(clock, 1000);
+	// Deletes old dates from DB
+	con.removeNews();
 
-	
-	function LoadNews() { 
-		var xhttp = new XMLHttpRequest();  // XMLHttpRequest gives typeError, but its has noget run in to any problems
-		xhttp.onload = function() {
-		 	 const svar = xhttp.responseText;
-			 const opslagdata = JSON.parse(svar);
-			 const opslag = opslagdata.news
-				
-			 	for(var i = 0; i <= opslag.length; i++) {
-					const titleText = opslag[i].header
-					const bodyText = opslag[i].body
-					const startText = opslag[i].startdate
-					const endText = opslag[i].enddate
-    				
-					function rotateTerm() { // using jquerry to make it fade make it change to the next set of data
-						var headernumber = $(".info_titeltext").data("header") || 0;
-						var bodynumber = $(".info_text").data("body") || 0;
-						var startnumber = $(".startdateholder").data("startdate") || 0;
-						var endnumber = $(".enddateholder").data("enddate") || 0;
-    					$(".info_titeltext")
-      						.data("header", headernumber == opslag.length - 1 ? 0 : headernumber + 1)
-							.html(opslag[headernumber].header)
-      						.fadeIn(500)	
-      						.delay(20000) 
-      						.fadeOut(500);
+	// Index site
+	app.get('/', function(req, res) { 
+		res.render('index.pug', {
+			// sends net1 bool into the variable netstatus on index.pug
+			netstatus: net1,
+		})
+	})
 
-						$(".info_text")
-      						.data("body", bodynumber == opslag.length - 1 ? 0 : bodynumber + 1)
-							.html(opslag[bodynumber].body)
-      						.fadeIn(500)	
-      						.delay(20000) 
-      						.fadeOut(500);
+	//Login site
+	app.get("/login", function(req, res) {
+		res.render('login.pug', {
+			verifyFail: req.session.verificationFailed // Transfer check over to pug file
+		})
+	})
 
-						$(".startdateholder")
-      						.data("startdate", startnumber == opslag.length - 1 ? 0 : startnumber + 1)
-							.html(opslag[startnumber].startdate)
-      						.fadeIn(500)	
-      						.delay(20000) 
-      						.fadeOut(500);
-
-						$(".enddateholder")
-      						.data("enddate", endnumber == opslag.length - 1 ? 0 : endnumber + 1)
-							.html(opslag[endnumber].enddate)
-      						.fadeIn(500)	
-      						.delay(20000) 
-      						.fadeOut(500, rotateTerm);						
-  					}
-  					rotateTerm();
-			
-					document.querySelector(".info_titeltext").innerHTML = titleText
-					document.querySelector(".info_text").innerHTML = bodyText
-					document.querySelector(".startdateholder").innerHTML = startText
-					document.querySelector(".enddateholder").innerHTML = endText
+	// Login system authentication
+	app.post("/authenticate", encoder, function(req, res) {
+		var Id = req.body.id
+		var password = req.body.password
+		db.query('SELECT * FROM users', (err, rows) => {
+			db.query("SELECT * FROM users WHERE Id = ? AND password = ?", [Id, password], function(error, results, fields) {
+				if (err) throw err;
+				if (results.length > 0 && rows[Id].status == "superuser") {
+					req.session.key = Id;
+					res.redirect("Admin/dashboard")
+				} else {
+					req.session.verificationFailed = true // Check to make sure fail message is shown
+					res.redirect("/login")
 				}
-				
+			})
+		});
 
-  		};
-		xhttp.open("GET", "http://localhost:3000/getMyJSON", true);
-		xhttp.send();
- 	}
-	LoadNews();
+	})
+
+	// admin panel
+	app.get('/Admin/dashboard', function(req, res) {
+		let session = req.session
+		if (session.key) {
+			res.render('Admin/dashboard.pug'), {
+				userID: session.key
+			}
+		} else {
+			req.session.verificationFailed = true // Check to make sure fail message is shown
+			res.redirect("/login")
+		}
+	})
+
+	app.get('/Admin/database', function(req, res) {
+		let session = req.session
+		if (session.key) {
+			res.render('Admin/database.pug'), {
+				userID: session.key
+			}
+		} else {
+			req.session.verificationFailed = true // Check to make sure fail message is shown
+			res.redirect("/login")
+		}
+	})
+
+	// admin panel
+	app.get('/Admin/messagemanager.pug', function(req, res) {
+		let session = req.session
+		if (session.key) {
+			res.render('Admin/messagemanager.pug')
+		} else {
+			req.session.verificationFailed = true // Check to make sure fail message is shown
+			res.redirect("/login")
+		}
+	})
+
+	app.post('/postnews', function(req, res) {
+		var title = req.body.title
+		var body = req.body.msg
+		var start = req.body.msg_startdato
+		var end = req.body.msg_enddato
+		if (start != null || end != null)
+			con.addNews(title.toString(), body.toString(), `"${start}"`, `"${end}"`)
+		else {
+			con.addNews(title.toString(), body.toString(), `null`, `null`)
+
+		}
+		res.redirect("Admin/dashboard")
+	})
+
+	app.get('/Admin/users', function(req, res) {
+		let session = req.session
+		if (session.key) {
+			res.render('Admin/users.pug'), {
+				userID: session.key
+			}
+		} else {
+			req.session.verificationFailed = true // Check to make sure fail message is shown
+			res.redirect("/login")
+		}
+	})
+
+	app.post("/logout", function(req, res) {
+		req.session.destroy(function(err) {
+			res.redirect('/');
+		});
+	})
+
+	app.post("/createUser", function(req, res) {
+		fname = req.body.fornavn
+		mname = req.body.mellemnavn
+		sname = req.body.efternavn
+		rname = req.body.role
+
+		if (mname == "")
+			mname = null
+		if (rname != "user" || rname != "superuser")
+			rname = "user"
+
+		con.addUser(fname, mname, sname, rname, null)
+
+		res.redirect("Admin/users?added=true")
+	})
+}
+
+// Host siden
+app.listen(PORT, ["0.0.0.0", "localhost"], () => {
+	console.log("Siden kan nu loades!")
 })
