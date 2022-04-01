@@ -34,13 +34,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		 	 const svar = xhttp.responseText;
 			 const opslagdata = JSON.parse(svar);
 			 const opslag = opslagdata.news
-				
+
 					function fadingData() { // using jquerry to make it fade and make it change to the next set of data
 						var headernumber = $(".info_titeltext").data("header") || 0;
 						var bodynumber = $(".info_text").data("body") || 0;
 						var startnumber = $(".startdateholder").data("startdate") || 0;
-						var endnumber = $(".enddateholder").data("enddate") || 0;
-
+						var endnumber = $(".enddateholder".substring(4,15)).data("enddate") || 0;
 						
     					$(".info_titeltext").data("header", headernumber == opslag.length - 1 ? 0 : headernumber + 1).html(opslag[headernumber].header)
 						$(".info_text").data("body", bodynumber == opslag.length - 1 ? 0 : bodynumber + 1).html(opslag[bodynumber].body);
