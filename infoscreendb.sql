@@ -63,7 +63,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Id`, `Fornavn`, `mellemnavn`, `Efternavn`, `status`, `password`, `birthday`) VALUES
-(0, 'skodatait', '', '', 'superuser', 'hejmeddig', NULL),
+(0, 'skodatait', '', '', 'superuser', 'FWh51UnBmjTH', NULL),
 (1, 'Simon', '', '', 'superuser', NULL, NULL),
 (2, 'Abdel-Rahman', 'Mohammad', 'Issa', 'user', NULL, NULL),
 (3, 'Abdullah', NULL, 'Abbas', 'user', NULL, NULL),
