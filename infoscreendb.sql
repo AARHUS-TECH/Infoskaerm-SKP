@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `news` (
   `ID` int(11) NOT NULL,
-  `Header` varchar(100) NOT NULL,
-  `Body` varchar(2400) DEFAULT NULL,
+  `Header` varchar(300) NOT NULL,
+  `Body` varchar(24000) DEFAULT NULL,
   `Startdate` date DEFAULT NULL,
   `Enddate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
@@ -39,10 +39,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`ID`, `Header`, `Body`, `Startdate`, `Enddate`) VALUES
-(3, 'Christmas', 'Marry christmas FUCKERS!', '2021-12-24', '2021-12-30'),
-(4, 'Newyear', 'EY NEW YEAR!', '2021-12-31', '2022-01-02'),
-(8, 'dsadasdasd jul1', 'ewsadsa', '2021-12-25', '2021-12-26'),
-(9, 'trestsfd', 'fsfds', '2021-11-20', '2022-04-09');
+(1, 'Påskeferien er lige om hjørnet', 'Vi vil gerne benytte lejligheden til at ønske Jer alle en god og velfortjent påskeferie. Håber I får tid til at nyde det forhåbentlige gode vejr sammen med familie og venner.', '2022-04-07', '2022-04-18');
+(2, 'Farvel til hovedforløbs eleverne', 'Herfra skal der lyde et farvel til de elever som skal starte på Hoverforløb efter påske. Vi har en del som starter på HF efter påske så held og lykke og få nu det allermeste ud af jeres undervisning', '2022-04-07', '2022-04-18');
 
 -- --------------------------------------------------------
 
@@ -65,7 +63,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Id`, `Fornavn`, `mellemnavn`, `Efternavn`, `status`, `password`, `birthday`) VALUES
-(0, 'Karsten', '', '', 'superuser', NULL, NULL),
+(0, 'skodatait', '', '', 'superuser', 'FWh51UnBmjTH', NULL),
 (1, 'Simon', '', '', 'superuser', NULL, NULL),
 (2, 'Abdel-Rahman', 'Mohammad', 'Issa', 'user', NULL, NULL),
 (3, 'Abdullah', NULL, 'Abbas', 'user', NULL, NULL),

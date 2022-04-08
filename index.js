@@ -26,7 +26,31 @@ var verificationFailed = false
 loadSite()
 setInterval(loadSite, 10000) // 10000ms, website live reloads every 10 seconds
 
+
+
 const app = express()
+
+app.get('/getMyJSON', function(req, res){ // data træk til opslagene med json og ajax
+	var opslagdata = "*";
+  db.query("SELECT * FROM news ORDER BY Startdate ASC", (err, rows,) => {
+    if (err) console.log(err); 
+    opslagdata = '{';
+    opslagdata += '"news":[';
+      for (var i = 0; i < rows.length; i++) {   
+        opslagdata += '{';
+        opslagdata += '"header" : "'+rows[i].Header+'",';
+        opslagdata += '"body" : "'+rows[i].Body+'",';
+        opslagdata += '"startdate" : "'+rows[i].Startdate+'",';
+        opslagdata += '"enddate" : "'+rows[i].Enddate+'"';
+        opslagdata += '},';
+      };
+	  opslagdata = opslagdata.substring(0,(opslagdata.length)-1)
+      opslagdata += ']}';   
+	  res.send(opslagdata);
+  });
+})
+
+
 var personList = []
 
 app.use(sess({
@@ -45,16 +69,6 @@ app.use(sess({
 }))
 
 var db = con.getConnection()
-var titleText = con.getNewsTitle()
-var bodyText = con.getNewsBody()
-
-// Needed to update news on refresh, can't be used in an async function
-function getInfo() {
-	titleText = con.getNewsTitle()
-	bodyText = con.getNewsBody()
-	startText = con.getNewsStartDate()
-	endText = con.getNewsEndDate()
-}
 
 async function loadSite() {
 	// Network Check
@@ -75,15 +89,10 @@ async function loadSite() {
 	con.removeNews();
 
 	// Index site
-	getInfo() // Update news
-	app.get('/', function(req, res) {
+	app.get('/', function(req, res) { 
 		res.render('index.pug', {
 			// sends net1 bool into the variable netstatus on index.pug
 			netstatus: net1,
-			getNewsTitle: titleText,
-			getNewsBody: bodyText,
-			getNewsStart: startText,
-			getNewsEnd: endText
 		})
 	})
 

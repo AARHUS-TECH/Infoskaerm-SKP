@@ -7,16 +7,7 @@ script.
     }
     else
       document.getElementById("netvaerksstatus").style.display = "none"
-
-    sessionStorage.setItem("titleText", `#{getNewsTitle}`)
-    sessionStorage.setItem("bodyText", `#{getNewsBody}`)
-    sessionStorage.setItem("startText", `#{getNewsStart}`)
-    sessionStorage.setItem("endText", `#{getNewsEnd}`)
   })
-
-
-
-
 
 head
   meta(charset='UTF-8')
@@ -34,21 +25,22 @@ head
   style
     include ./css/style.css
   title info screen
-
 div.clock.klokken 
-#AARHUSTECH.AARHUSTECH AARHUS TECH SKP
+#AARHUSTECH.AARHUSTECH AARHUSTECH SKP
 #dato.dato 
 #aktiviteter.aktiviteter Aktiviteter
 p#netvaerksstatus.netvaerksstatus Netv&aelig;rksstatus
 div.center
   // div til de to bokse
   div.info
-    div.info_titeltext
-    div.info_text
-    div.info_titeltext
-    div.info_text
-    div.info_titeltext
-    div.info_text
+    div.info_titelbox
+      .info_titeltext
+    div.info_textbox
+      .info_text
+    div.startdateholder
+      p.test3
+    div.enddateholder
+      p.test4
   div.kontakt
     #rotate.instruktoer
 
@@ -63,3 +55,5 @@ div.ticker-container
           p
             // - side hvor for vores script fra https://rss.bloople.net/
             script(src='//rss.bloople.net/?url=https%3A%2F%2Fwww.dr.dk%2Fnyheder%2Fservice%2Ffeeds%2Fsenestenyt&showtitle=false&type=js')
+
+
