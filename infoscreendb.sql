@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Vært: localhost:3306
--- Genereringstid: 08. 12 2021 kl. 12:37:30
--- Serverversion: 10.3.31-MariaDB-0+deb10u1
--- PHP-version: 7.3.31-1~deb10u1
+-- Genereringstid: 08. 04 2022 kl. 08:37:48
+-- Serverversion: 10.4.22-MariaDB
+-- PHP-version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `news` (
   `ID` int(11) NOT NULL,
-  `Header` varchar(300) NOT NULL,
-  `Body` varchar(24000) DEFAULT NULL,
+  `Header` varchar(100) NOT NULL,
+  `Body` varchar(2400) DEFAULT NULL,
   `Startdate` date DEFAULT NULL,
   `Enddate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
@@ -39,8 +40,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`ID`, `Header`, `Body`, `Startdate`, `Enddate`) VALUES
-(1, 'Påskeferien er lige om hjørnet', 'Vi vil gerne benytte lejligheden til at ønske Jer alle en god og velfortjent påskeferie. Håber I får tid til at nyde det forhåbentlige gode vejr sammen med familie og venner.', '2022-04-07', '2022-04-18');
-(2, 'Farvel til hovedforløbs eleverne', 'Herfra skal der lyde et farvel til de elever som skal starte på Hoverforløb efter påske. Vi har en del som starter på HF efter påske så held og lykke og få nu det allermeste ud af jeres undervisning', '2022-04-07', '2022-04-18');
+(13, 'Påskeferien er lige om hjørnet', 'Vi vil gerne benytte lejligheden til at ønske Jer alle en god og velfortjent påskeferie. Håber I får tid til at nyde det forhåbentlige gode vejr sammen med familie og venner.', '2022-04-07', '2022-04-18'),
+(14, 'Farvel til hovedforløbs eleverne', 'Herfra skal der lyde et farvel til de elever som skal starte på Hoverforløb efter påske. Vi har en del som starter på HF efter påske så held og lykke og få nu det allermeste ud af jeres undervisning', '2022-04-07', '2022-04-18');
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Id`, `Fornavn`, `mellemnavn`, `Efternavn`, `status`, `password`, `birthday`) VALUES
-(0, 'skodatait', '', '', 'superuser', 'FWh51UnBmjTH', NULL),
+(0, 'Karsten', '', '', 'superuser', NULL, NULL),
 (1, 'Simon', '', '', 'superuser', NULL, NULL),
 (2, 'Abdel-Rahman', 'Mohammad', 'Issa', 'user', NULL, NULL),
 (3, 'Abdullah', NULL, 'Abbas', 'user', NULL, NULL),
@@ -75,7 +76,7 @@ INSERT INTO `users` (`Id`, `Fornavn`, `mellemnavn`, `Efternavn`, `status`, `pass
 (9, 'Andreas', 'Bech', 'Hansen', 'user', NULL, NULL),
 (10, 'Andreas', 'Loft', 'Nørgård', 'user', NULL, NULL),
 (11, 'Ayman', NULL, 'Amche', 'user', NULL, NULL),
-(12, 'Bastian', NULL, 'Johansen', 'superuser', '050804', NULL),
+(12, 'Bastian', NULL, 'Johansen', 'user', '050804', NULL),
 (13, 'Bjarke', 'Welander', 'Hald', 'user', NULL, NULL),
 (14, 'Bjørn', 'Svane', 'Magnus', 'user', NULL, NULL),
 (15, 'Casper', NULL, 'Nielsen', 'user', NULL, NULL),
@@ -86,7 +87,7 @@ INSERT INTO `users` (`Id`, `Fornavn`, `mellemnavn`, `Efternavn`, `status`, `pass
 (20, 'Dennis', 'Cornett', 'Hansen', 'user', NULL, NULL),
 (21, 'Emil', 'Alexander Rauff', 'Kastrup', 'user', NULL, NULL),
 (22, 'Emil', NULL, 'Qvistgaard', 'user', NULL, NULL),
-(23, 'Eray', NULL, 'Tecer', 'superuser', '290703', NULL),
+(23, 'Eray', NULL, 'Tecer', 'user', '290703', NULL),
 (24, 'Esben', 'Stenger', 'Jacobsen', 'user', NULL, NULL),
 (25, 'Frank', 'Møller', 'Jensen', 'user', NULL, NULL),
 (26, 'Frederik', 'Emil', 'Hartvigsen', 'user', NULL, NULL),
@@ -103,7 +104,7 @@ INSERT INTO `users` (`Id`, `Fornavn`, `mellemnavn`, `Efternavn`, `status`, `pass
 (37, 'Jonas', 'Bålow', 'Schou', 'user', NULL, NULL),
 (38, 'Jonas', 'Wagner', 'Langmaack', 'user', NULL, NULL),
 (39, 'Kasper', 'Anholm', 'Salomonsen', 'user', NULL, NULL),
-(40, 'Kasper', NULL, 'Kammer', 'superuser', '080502', NULL),
+(40, 'Kasper', NULL, 'Kammer', 'user', '080502', NULL),
 (41, 'Kasper', 'Plass', 'Jensen', 'user', NULL, NULL),
 (42, 'Lasse', 'Emil', 'Jensen', 'user', NULL, NULL),
 (43, 'Laurits', 'Anders Flinck', 'Hansen', 'user', NULL, NULL),
@@ -131,7 +132,7 @@ INSERT INTO `users` (`Id`, `Fornavn`, `mellemnavn`, `Efternavn`, `status`, `pass
 (65, 'Philip', 'Fay', 'Svendsen', 'user', NULL, NULL),
 (66, 'Priyanka', NULL, 'Srivastava', 'user', NULL, NULL),
 (67, 'Rasmus', 'Damsgaard', 'Andersen', 'user', NULL, NULL),
-(68, 'Rasmus', 'Høllund', 'Kristensen', 'superuser', '230204', NULL),
+(68, 'Rasmus', 'Høllund', 'Kristensen', 'user', '230204', NULL),
 (69, 'Rico', 'Sikem', 'Carlsson', 'user', NULL, NULL),
 (70, 'Samuel', 'Ghebrehiwet', 'Gebremichael', 'user', NULL, NULL),
 (71, 'Sebastian', 'Skovbo', 'Clausen', 'user', NULL, NULL),
@@ -176,7 +177,9 @@ ALTER TABLE `users`
 -- Tilføj AUTO_INCREMENT i tabel `news`
 --
 ALTER TABLE `news`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
