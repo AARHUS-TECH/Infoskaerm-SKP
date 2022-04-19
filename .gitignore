@@ -1,3 +1,7 @@
+# Node moduler som skal installeres lokalt for at få det til at virke
 node_modules
+
+# Lokale filer som ikke skal lægges op på GitHub
 /Software
+koder til infoskærm.docx
 localhost.sql
