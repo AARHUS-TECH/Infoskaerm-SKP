@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		this.date = (new Date())
 		document.getElementById('dato').innerHTML = Intl.DateTimeFormat("da-dk").format(this.date)
 	}
+	
 	setInterval(setDate, 1000)
 
 	clock()
@@ -48,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					$(".enddateholder").data("enddate", endnumber == opslag.length - 1 ? 0 : endnumber + 1).html(opslag[endnumber].enddate);
 						
 					$(".info_titeltext,.info_text").fadeIn(500).delay(2000).fadeOut(500);
-				}, 10000);
+				}, 20000);
 
 			}
 
