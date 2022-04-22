@@ -61,3 +61,4 @@ OS: Raspberry OS
 - [ ] Add capability for more than 3 news (replace existing in order)
 - [x] Implement startDate and endDate to the database
 - [ ] Delete after endDate
+- [ ] Setting better time for slides, for better readability
