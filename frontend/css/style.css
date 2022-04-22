@@ -72,7 +72,7 @@ body {
 }
 
 .info_titeltext {
-  font-size: 17px;
+  font-size: 28px;
 }
 
 .info_textbox {
@@ -88,6 +88,7 @@ body {
 .info_text {
   font-size: 12px;
 }
+
 .kontakt {
   background-color: #e62613;
   position: absolute;
