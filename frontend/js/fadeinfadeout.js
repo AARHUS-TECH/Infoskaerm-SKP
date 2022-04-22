@@ -16,9 +16,11 @@ var terms = [
     <p class="instruktoer_title">Simon kan kontaktes p&aring;:</p>
     mail: sas@aarhustech.dk<br> Telefon: 22234166
     </p>`,
+
   `Alt hvad du skal vide om skp finder du her: <img src="images/skpdatait.png" class="QR_kode"> <br><br> www.ats-skpdatait.dk 
    <br> <br> <br> Hvis du mangler noget bestiller du det her: <img src="images/skpinventar.png" class="QR_kode"> <br> <br> www.inventar.ats-skpdatait.dk
    <br> <br> <br> Du kan se en plan over skolen her: <img src="images/skpfindvej.png" class="QR_kode"><br><br> www.findvej.ats-skpdatait.dk`,
+
   `<p class="instruktoer_title">Servicedesk</p><br>Du kan henvende dig i Servicedesk for at få hjælp de mest almindelige problemer. Også hvis du har problemer med at logge. Servicedesk ligger på 3. sal i lokale AS318<br> <br> <br>  <br>
    <p class="instruktoer_title">Techdesk</p><br>Når du går på hovedforløb kan du bestille udstyr gennem inventar.ats-skpdatait.dk. De vil så finde dit udstyr frem og udlevere det. Techdesk er placeret på 2. sal på gangen med hovedforløbet i lokale AC206`,
 ];
