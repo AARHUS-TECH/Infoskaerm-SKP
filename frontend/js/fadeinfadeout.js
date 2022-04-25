@@ -25,15 +25,15 @@ var terms = [
    <p class="instruktoer_title">Techdesk</p><br>Når du går på hovedforløb kan du bestille udstyr gennem inventar.ats-skpdatait.dk. De vil så finde dit udstyr frem og udlevere det. Techdesk er placeret på 2. sal på gangen med hovedforløbet i lokale AC206`,
 ];
 
-  function rotateTerm() {
-    var ct = $("#rotate").data("term") || 0;
-    $("#rotate")
-      .data("term", ct == terms.length - 1 ? 0 : ct + 1)
-      .html(terms[ct])
-      .fadeIn()
-      .delay(20000) //her styre man hvornår næste slide kommer
-      .fadeOut(1000, rotateTerm); //her styrer man hvor langtid fade skal vare
-  }
+function rotateTerm() {
+  var ct = $("#rotate").data("term") || 0;
+  $("#rotate")
+    .data("term", ct == terms.length - 1 ? 0 : ct + 1)
+    .html(terms[ct])
+    .fadeIn()
+    .delay(3000) //her styre man hvornår næste slide kommer
+    .fadeOut(1000, rotateTerm); //her styrer man hvor langtid fade skal vare
+}
 
 // gør alle html færdig hentet før vores scipt køre
 window.onload = rotateTerm;
