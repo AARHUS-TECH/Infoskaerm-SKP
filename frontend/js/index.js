@@ -49,14 +49,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					$(".enddateholder").data("enddate", endnumber == opslag.length - 1 ? 0 : endnumber + 1).html(opslag[endnumber].enddate);
 						
 					$(".info_titeltext,.info_text").fadeIn(500).delay(2000).fadeOut(500);
-				}, 20000);
+				}, 3500);
 
 			}
 
 			fadingData();
   		};
 		  
-		xhttp.open("GET", "http://10.250.250.96:3000/getMyJSON/", true);
+		xhttp.open("GET", "http://localhost:3000/getMyJSON/", true);
 		xhttp.send();
  	}
 
