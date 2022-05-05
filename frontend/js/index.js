@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					$(".startdateholder").data("startdate", startnumber == opslag.length - 1 ? 0 : startnumber + 1).html(opslag[startnumber].startdate);
 					$(".enddateholder").data("enddate", endnumber == opslag.length - 1 ? 0 : endnumber + 1).html(opslag[endnumber].enddate);
 						
-					$(".info_titeltext,.info_text").fadeIn(500).delay(2000).fadeOut(500);
+					$(".info_titeltext,.info_text").fadeIn(500).delay(4000).fadeOut(500);
 				}, 3500);
 
 			}

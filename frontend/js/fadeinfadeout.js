@@ -31,7 +31,7 @@ function rotateTerm() {
     .data("term", ct == terms.length - 1 ? 0 : ct + 1)
     .html(terms[ct])
     .fadeIn()
-    .delay(3000) //her styre man hvornår næste slide kommer
+    .delay(10000) //her styre man hvornår næste slide kommer
     .fadeOut(1000, rotateTerm); //her styrer man hvor langtid fade skal vare
 }
 
