@@ -83,7 +83,7 @@ async function loadSite() {
     
     // view engine + public folder
     app.set("views", "frontend")
-    app.set('view engine', 'pug')
+    app.set("view engine", "pug")
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static('Admin'));
