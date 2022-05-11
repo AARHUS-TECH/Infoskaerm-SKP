@@ -128,11 +128,11 @@ async function loadSite() {
     })
 
     
-    // admin panel
-    app.get('/admin/dashboard', function(req, res) {
+    //#region admin panel
+    app.get('/admin/', function(req, res) {
         let session = req.session
         if (session.key) {
-            res.render('Admin/dashboard.pug'), {
+            res.render('admin/dashboard.pug'), {
                 userID: session.key
             }
         } else {
@@ -140,6 +140,20 @@ async function loadSite() {
             res.redirect("/login")
         }
     })
+
+    app.get('/admin/dashboard', function(req, res) {
+        let session = req.session
+        if (session.key) {
+            res.render('admin/dashboard.pug'), {
+                userID: session.key
+            }
+        } else {
+            req.session.verificationFailed = true // Check to make sure fail message is shown
+            res.redirect("/login")
+        }
+    })
+    //#endregion admin panel
+
 
     app.get('/admin/database', function(req, res) {
         let session = req.session
