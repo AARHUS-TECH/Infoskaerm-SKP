@@ -93,7 +93,6 @@ async function loadSite() {
     // Deletes old dates from DB
     con.removeNews();
 
-    
     // Index site
     app.get('/', function(req, res) { 
         res.render('index.pug', {
@@ -102,14 +101,12 @@ async function loadSite() {
         })
     })
 
-
     //Login site
     app.get("/login", function(req, res) {
         res.render('login.pug', {
             verifyFail: req.session.verificationFailed // Transfer check over to pug file
         })
     })
-
 
     // Login system authentication
     app.post("/authenticate", encoder, function(req, res) {
