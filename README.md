@@ -57,8 +57,14 @@ OS: Raspberry OS
 32" TV
 
 # TO DO:
-
-- [ ] Add capability for more than 3 news (replace existing in order)
+- [x] Add capability for more than 3 news (replace existing in order)
 - [x] Implement startDate and endDate to the database
-- [ ] Delete after endDate
+- [ ] Do not show newsitem after expiration date (endDate)
 - [ ] Setting better time for slides, for better readability
+- [ ] Admin for user
+- [ ] Admin for newsitems
+- [ ] Use of HTML in newsitems
+- [ ] Use og images in newsitems
+- [ ] Regular backup settings
+- [ ] Message part is not controlable for time
+- [ ] 
