@@ -61,8 +61,8 @@ OS: Raspberry OS
 - [x] Implement startDate and endDate to the database
 - [ ] Do not show newsitem after expiration date (endDate)
 - [ ] Setting better time for slides, for better readability
-- [ ] Admin for user
-- [ ] Admin for newsitems
+- [ ] Admin interface for user
+- [ ] Admin interface for newsitems
 - [ ] Use of HTML in newsitems or other formatting
 - [ ] Use og images in newsitems
 - [ ] Regular backup settings
