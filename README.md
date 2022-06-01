@@ -63,8 +63,7 @@ OS: Raspberry OS
 - [ ] Setting better time for slides, for better readability
 - [ ] Admin for user
 - [ ] Admin for newsitems
-- [ ] Use of HTML in newsitems
+- [ ] Use of HTML in newsitems or other formatting
 - [ ] Use og images in newsitems
 - [ ] Regular backup settings
 - [ ] Message part is not controlable for time
-- [ ] 
