@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+.ticker-container {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  text-align: center;
+ 
+}
+
+.ticker {
+  display: flex;
+  flex-wrap: wrap;
+  height: 60px;
+  margin: 0 auto;
+  width: 110%;
+  
+}
+
+.news {
+  width: 85%;
+  height: 25%;
+  float: right;
+  color: black;
+  padding-top: 1.5px;
+  
+}
+
+.title {
+  
+  /*text-align: center;
+  background: black;*/
+  position: relative;
+  /*color: white;
+  padding: 10px;
+  border-radius: 0%;*/
+  overflow: hidden;
+  bottom: 0;
+  
+ 
+}
+
+/*.title::after {
+  position: absolute;
+  content: "";
+  right: -40%;
+  border-left: 20px solid black;
+  border-top: 30px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 30px solid transparent;
+  top: 0px;
+}*/
+
+.title h5 {
+  font-size: 28px;
+  margin: 5%;
+  font-weight: 5000;
+}
+.news marquee {
+  font-size: 18px;
+  background-color: lightgray;
+  
+}
+
+h4 {
+  margin-right: 40px;
+  display: inline;
+  white-space: nowrap;
+  font-family: Arial, Helvetica, sans-serif;
+  
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+</style>
+
+</head>    
+</body>
+<div class="ticker-container">
+      <div class="ticker">
+        <div class="title"> <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4MScgaGVpZ2h0PScyNCcgeG1sOnNwYWNlPSdwcmVzZXJ2ZSc+PHBhdGggZD0nTTAgMGg4MXYyNEgweicvPjxnIGZpbGw9JyNGRkYnPjxwYXRoIGQ9J00zMi4xMzUgNS42NTlIMTQuNDQ0Yy0uMTU3IDAtLjIzNS4wOTItLjIzNS4yMzF2MTEuNzM2YzAgLjE0Mi4wNzguMjMxLjIzNS4yMzFoMTcuNjkxYzUuMTk2IDAgNy44MTktMS43IDcuODE5LTYuMTM5IDAtNC40MDYtMi42MjMtNi4wNTktNy44MTktNi4wNTl6bS00LjU4MSA5Ljk1N2gtNS41NDJjLS4xNTggMC0uMTg4LS4wNjItLjE4OC0uMTg3VjguMDg2YzAtLjEyNC4wMy0uMTg2LjE4OC0uMTg2aDUuNTQyYzMuMjk2IDAgNC42MTUuOTI4IDQuNjE1IDMuODUxLS4wMDEgMi45MjQtMS4zMTkgMy44NjUtNC42MTUgMy44NjV6TTY3Ljg2MyAxNy4zNjRsLTUuMTE3LTMuNTU4Yy0uMTI1LS4wOTItLjIwNS0uMTM5LS4yMDUtLjIwMSAwLS4wNjEuMDQ4LS4wOTQuMTU4LS4wOTQgMi41OSAwIDQuNTk5LTEuMTg4IDQuNTk5LTMuODE4IDAtMi42MTMtMS43MjgtNC4wMzYtNC45MTMtNC4wMzZINDIuOTk4Yy0uMTU3IDAtLjIzNC4wOTItLjIzNC4yMzF2MTEuNzM2YzAgLjE0MS4wNzcuMjMyLjIzNC4yMzJoNy4xMzRjLjE1NyAwIC4yMzYtLjA5Mi4yMzYtLjIzMnYtMi43ODNjMC0uMTM5LjA0Ni0uMTg0LjE4OC0uMTg0aDQuMTA0Yy4yMDQgMCAuMjgyLjAxNi40MjMuMTIzbDMuNTY0IDIuOTA2Yy4xNzQuMTM5LjI5Ny4xNy41MDIuMTdoOC44NjljLjEyNyAwIC4xODgtLjA0NS4xODgtLjE0LjAwMy0uMTE4LS4yMTgtLjI2LS4zNDMtLjM1MnptLTExLjExMS00Ljg4NmgtNi4xODZjLS4xNDQgMC0uMTg5LS4wNDctLjE4OS0uMTg2VjguMDg2YzAtLjEzOS4wNDctLjE4Ni4xODktLjE4Nmg2LjE4NmMyLjA3MSAwIDIuOTUuNTU4IDIuOTUgMi4yNDQgMCAxLjY5OS0uODc5IDIuMzM0LTIuOTUgMi4zMzR6Jy8+PC9nPjwvc3ZnPg==" alt="DR logo" width="180px" height="60px"></div>
+        <div class="news">
+          <marquee loop="infinite">
+            <p>
+              <!--- side hvor for vores script fra https://rss.bloople.net/-->
+              <script src="https://embeds.rss2html.net/embed.js?url=https%3A%2F%2Fwww.dr.dk%2Fnyheder%2Fservice%2Ffeeds%2Fsenestenyt&amp;embed_render_title=0&amp;feed_render_image=0&amp;feed_render_description=0"></script>
+            </p>
+          </marquee>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

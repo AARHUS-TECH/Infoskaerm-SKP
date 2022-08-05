@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap");
+
+* {
+  transition: 0.4s;
+}
+
+.navbar {
+  width: 300px;
+  border: 2px solid #ffffff30;
+  border-radius: 15px;
+  position: relative;
+  box-shadow: 0 0 15px -5px #00000030;
+  font-family: "poppins", sans-serif;
+  margin-top: 138px;
+}
+
+.toggle-menu {
+  position: relative;
+  top: 15px;
+  left: 15px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.toggle-menu i {
+  color: #81305d;
+  font-size: 2.5em;
+}
+
+.admin-profile,
+.item-list,
+.logout {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.item-list:hover,
+.logout:hover {
+  background-color: #ffffff60;
+}
+
+.admin-profile {
+  background-color: #ffffff70;
+}
+
+.icons {
+  width: 50px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 40px 0;
+}
+
+.icons img {
+  width: 40px;
+  height: 40px;
+}
+
+.icons i {
+  font-size: 2em;
+  color: #81305d;
+}
+
+span {
+  display: flex;
+  font-size: 1.5em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #81305d;
+  margin-left: 10px;
+}
+a {
+  color: inherit;
+  text-decoration: none; /* no underline */
+}
+#dbmanager {
+  align-items: center;
+}
+.clock {
+  font-size: 3em;
+  text-align: center;
+  vertical-align: text-top;
+}
+.box2 {
+  background-color: #f2f2f2;
+  align-content: center;
+  height: 430px;
+  width: 700px;
+  float: center;
+  margin-left: 420px;
+  z-index: 3;
+  margin-top: 50px;
+  border-radius: 30px;
+  vertical-align: text-top;
+  box-shadow: 0px 0px 36px 10px rgba(129, 255, 106, 0.45);
+}
+
+#tusers {
+  width: 190px;
+  height: 60px;
+  background-color: rgb(26, 4, 45);
+  border-radius: 30px;
+  z-index: 3;
+  position: relative;
+  top: 10%;
+  left: 5%;
+  box-shadow: 0px 0px 10px 10px rgba(75, 56, 56, 0.4);
+}

@@ -1,0 +1,57 @@
+doctype html
+script.
+  document.addEventListener("DOMContentLoaded", function(event) {
+    if (#{netstatus} == false) {
+      document.getElementById("netvaerksstatus").style.display = "block"
+      document.getElementById("netvaerksstatus").style.color = "red";
+    }
+    else
+      document.getElementById("netvaerksstatus").style.display = "none"
+  })
+
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  //meta(http-equiv='refresh', content='60')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+  script(src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js")
+  script(src='frontend/js/fadeinfadeout.js')
+  script(type='text/javascript' defer src='/frontend/js/index.js')
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF', crossorigin='anonymous')
+  link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.0/css/all.css', integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ', crossorigin='anonymous')
+  link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Poppins')
+  style
+    include ./css/style.css
+  title info screen
+div.clock.klokken 
+#AARHUSTECH.AARHUSTECH AARHUSTECH SKP
+#dato.dato 
+#aktiviteter.aktiviteter Aktiviteter
+p#netvaerksstatus.netvaerksstatus Netv&aelig;rksstatus
+div.center
+  // div til de to bokse
+  div.info
+    div.info_titelbox
+      .info_titeltext
+    div.info_textbox
+      .info_text
+      //.startdateholder
+      //.enddateholder
+  div.kontakt
+    #rotate.instruktoer
+
+div.ticker-container
+  div.widthcontainer
+    div.ticker
+      div.title
+        img#DRlogo(src ="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4MScgaGVpZ2h0PScyNCcgeG1sOnNwYWNlPSdwcmVzZXJ2ZSc+PHBhdGggZD0nTTAgMGg4MXYyNEgweicvPjxnIGZpbGw9JyNGRkYnPjxwYXRoIGQ9J00zMi4xMzUgNS42NTlIMTQuNDQ0Yy0uMTU3IDAtLjIzNS4wOTItLjIzNS4yMzF2MTEuNzM2YzAgLjE0Mi4wNzguMjMxLjIzNS4yMzFoMTcuNjkxYzUuMTk2IDAgNy44MTktMS43IDcuODE5LTYuMTM5IDAtNC40MDYtMi42MjMtNi4wNTktNy44MTktNi4wNTl6bS00LjU4MSA5Ljk1N2gtNS41NDJjLS4xNTggMC0uMTg4LS4wNjItLjE4OC0uMTg3VjguMDg2YzAtLjEyNC4wMy0uMTg2LjE4OC0uMTg2aDUuNTQyYzMuMjk2IDAgNC42MTUuOTI4IDQuNjE1IDMuODUxLS4wMDEgMi45MjQtMS4zMTkgMy44NjUtNC42MTUgMy44NjV6TTY3Ljg2MyAxNy4zNjRsLTUuMTE3LTMuNTU4Yy0uMTI1LS4wOTItLjIwNS0uMTM5LS4yMDUtLjIwMSAwLS4wNjEuMDQ4LS4wOTQuMTU4LS4wOTQgMi41OSAwIDQuNTk5LTEuMTg4IDQuNTk5LTMuODE4IDAtMi42MTMtMS43MjgtNC4wMzYtNC45MTMtNC4wMzZINDIuOTk4Yy0uMTU3IDAtLjIzNC4wOTItLjIzNC4yMzF2MTEuNzM2YzAgLjE0MS4wNzcuMjMyLjIzNC4yMzJoNy4xMzRjLjE1NyAwIC4yMzYtLjA5Mi4yMzYtLjIzMnYtMi43ODNjMC0uMTM5LjA0Ni0uMTg0LjE4OC0uMTg0aDQuMTA0Yy4yMDQgMCAuMjgyLjAxNi40MjMuMTIzbDMuNTY0IDIuOTA2Yy4xNzQuMTM5LjI5Ny4xNy41MDIuMTdoOC44NjljLjEyNyAwIC4xODgtLjA0NS4xODgtLjE0LjAwMy0uMTE4LS4yMTgtLjI2LS4zNDMtLjM1MnptLTExLjExMS00Ljg4NmgtNi4xODZjLS4xNDQgMC0uMTg5LS4wNDctLjE4OS0uMTg2VjguMDg2YzAtLjEzOS4wNDctLjE4Ni4xODktLjE4Nmg2LjE4NmMyLjA3MSAwIDIuOTUuNTU4IDIuOTUgMi4yNDQgMCAxLjY5OS0uODc5IDIuMzM0LTIuOTUgMi4zMzR6Jy8+PC9nPjwvc3ZnPg==" ) 
+      |       
+      div.news
+        marquee(loop='infinite')
+          p
+            // - side hvor for vores script fra https://rss.bloople.net/
+            script(src='//rss.bloople.net/?url=https%3A%2F%2Fwww.dr.dk%2Fnyheder%2Fservice%2Ffeeds%2Fsenestenyt&showtitle=false&type=js')
+          
+

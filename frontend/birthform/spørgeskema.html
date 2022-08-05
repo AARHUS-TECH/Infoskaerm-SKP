@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styleform.css">
+</head>
+<body>
+<div class="card">
+    <div class="card-body text-black bg-white align-items-center" >
+        <img src="download-1-removebg-preview.png" class="mx-auto d-block" width="100px" height="100px" alt="aarhustech logo">
+    </div> <!--top af skærmen med logo-->
+
+<div class="a">spørgeskema til infoskærm</div> <!--red line-->
+
+<p class="resume">Vi er ved at lave en infoskærm til SKP og ville
+      gerne have lov til at vise hvem har fødselsdag
+    og have lov til gemme data du udfylder </p>
+
+    <form>
+        <div class="form-group"> <!--navn-->
+            <p class="navn"> Dit fulde navn</p>
+            <input type="text" class="form-control" placeholder="spørgsmål 1" id="spørgsmål-1" name="spørgsmål-1" required>
+        </div>
+
+        <hr> <!---sort line-->
+
+        <p class="spørgsmål-2"> Din fødselsdagsdato</p>
+        <div>
+           <label for="fødselsdagsdato">fødselsdagsdato:</label>
+  <input type="date" id="fødselsdagsdato" name="fødselsdagsdato" required>
+  
+        </div> 
+
+        <hr> <!---sort line-->
+
+       <input type="checkbox" name="samtykke" class="form-check-input" id= samtykke  required>
+        <label  type="checkbox" for="samtykke">Jeg giver samtykke til at i opbevarer min data som udfyldt til at fremvise 
+            <br> på SKP infoskærm. (Din data bliver behandlet i forhold til GPDR reglerne).
+        </label> <br>
+
+    <button class="btn btn-class border border-dark" type="submit" id="send" >send</button>
+
+    <div class="b"> 
+<p class="email"> 
+     Du er velkommen til at kontakte os, hvis du har spørgsmål om, hvordan vi behandler personoplysninger,
+      eller hvis du ville have noget slettet, så kontakt os på email <br> kontakt@ats-skpdatait.dk</p>
+
+    </div>
+
+</form> 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+body {
+  max-width: 100%;
+  margin: 0px;
+  padding: 0xp;
+}
+
+textarea {
+  margin: 9%;
+  resize: none;
+}
+
+.container_msg {
+  background-color: #d7d7d7;
+  align-content: center;
+  width: 620px;
+  margin: auto;
+  display: block;
+  margin-top: 20%;
+  margin-right: 35%;
+  padding-bottom: 25px;
+}
+
+#msgtitle {
+  padding: 20px;
+  position: absolute;
+  margin-left: 3%;
+  font-size: 24px;
+}
+
+#msg {
+  display: block;
+  width: 500px;
+  height: 150px;
+  resize: none;
+}
+
+.startbox {
+  margin-left: 6.5%;
+}
+
+.endbox {
+  margin-left: 6.5%;
+}
+
+#title {
+  width: 500px;
+  height: 20px;
+  display: block;
+  resize: none;
+  margin-top: 90px;
+}
+
+#postmsg {
+  width: 160px;
+  margin-left: 6%;
+  float: left;
+}
+
+#editmsg {
+  width: 160px;
+  float: left;
+  margin-left: 5%;
+}
+
+#delmsg {
+  width: 160px;
+  float: left;
+  margin-left: 5%;
+}
+
+#ttitle {
+  position: relative !important;
+  margin-left: 9%;
+  bottom: -85px;
+}
+
+#tmessage {
+  position: absolute;
+  margin-left: 5%;
+  margin-top: -3%;
+}
+
+.header {
+  font-family: "poppins", serif;
+  font-size: 60px;
+  background: linear-gradient(to bottom, #e62613, #a81b0e);
+  color: white;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+}
+
+.container-test{
+  margin-top: -24px;
+}
+
+.center {
+  position: absolute;
+  left: 35%;
+  padding: 10px;
+  z-index: 2;
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+  body {
+    
+  }
+  .container_msg {
+    margin-right: 9vw;
+  }
+}

@@ -1,0 +1,9 @@
+script.
+  document.addEventListener("DOMContentLoaded", function(event) {
+    if(#{loggedIn} == false) {
+      return window.location.href= "login.pug";
+    }
+  });
+doctype html
+
+p#validation yay #{userID} successfully logged in
