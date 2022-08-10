@@ -1,6 +1,6 @@
 {
     "type": "ftp",
-    "host": "192.168.160.249",
+    "host": "192.168.160.177",
     "username": "pi",
     "password": "raspberry",
     "port": 21,

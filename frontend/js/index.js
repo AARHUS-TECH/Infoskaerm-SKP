@@ -33,8 +33,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	async function LoadNews() { 
 		var xhttp = new XMLHttpRequest();  // XMLHttpRequest gives typeError, but its has noget run in to any problems
 		xhttp.onload = async function() {
-		 	 const svar = await xhttp.responseText;
-			 const opslagdata = await JSON.parse(svar);
+			
+		 	const svar = await xhttp.responseText;
+			 const opslagdata = await JSON.parse(svar)
 			 const opslag = await opslagdata.news
 					
 			async function fadingData() { // using jquerry to make it fade and make it change to the next set of data
@@ -52,12 +53,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					$(".startdateholder").data("startdate", startnumber == opslag.length - 1 ? 0 : startnumber + 1).html(opslag[startnumber].startdate);
 					$(".enddateholder").data("enddate", endnumber == opslag.length - 1 ? 0 : endnumber + 1).html(opslag[endnumber].enddate);
 						
-					$(".info_titeltext,.info_text").fadeIn(500).delay(1000).fadeOut(500);
+					$(".info_titeltext,.info_text").fadeIn(500).delay(10000).fadeOut(500);
 					
 					console.log(n)
 					console.log("[" + (new Date().getTime() - timer) / 1000 + "s]")
 					
-				}, 2100);
+				}, 11100);
 				
 			}
 
