@@ -13,7 +13,7 @@ head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible', content='IE=edge')
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
-  //meta(http-equiv='refresh', content='60')
+  meta(http-equiv='refresh', content='7200')
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
   script(src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js")
@@ -50,8 +50,8 @@ div.ticker-container
       |       
       div.news
         marquee(loop='infinite')
-          p
+          p#rss_ticker
             // - side hvor for vores script fra https://rss.bloople.net/
-            script(src='//rss.bloople.net/?url=https%3A%2F%2Fwww.dr.dk%2Fnyheder%2Fservice%2Ffeeds%2Fsenestenyt&showtitle=false&type=js')
+            script(src="//rss.bloople.net/?url=https%3A%2F%2Fwww.dr.dk%2Fnyheder%2Fservice%2Ffeeds%2Fsenestenyt&showtitle=false&type=js")
           
 
