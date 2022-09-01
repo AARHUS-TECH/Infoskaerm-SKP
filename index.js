@@ -192,7 +192,7 @@ async function loadSite() {
         res.redirect("Admin/dashboard")
     })
 
-    app.get('/Admin/users', function(req, res) {
+    app.get('/admin/users', function(req, res) {
         let session = req.session
         if (session.key) {
             res.render('Admin/users.pug'), {
