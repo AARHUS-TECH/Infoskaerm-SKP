@@ -1,6 +1,24 @@
 n = 0
 document.addEventListener("DOMContentLoaded", function(event) {
 
+	document.onmousemove = (function () {
+		var onmousestop = function () {
+			/* do stuff when mouse stops */
+			document.querySelector(".center").style.cursor = "none";
+			},
+			thread;
+
+		return function () {
+			clearTimeout(thread);
+			thread = setTimeout(onmousestop, 5000);
+		};
+	})();
+
+	addEventListener("mousemove", (event) => {});
+	onmousemove = (event) => {
+	document.querySelector(".center").style.cursor = "default";
+	};
+
 	setDate()
 
 	function setDate() {
@@ -35,8 +53,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		xhttp.onload = async function() {
 			
 		 	const svar = await xhttp.responseText;
-			 const opslagdata = await JSON.parse(svar)
-			 const opslag = await opslagdata.news
+			const opslagdata = await JSON.parse(svar)
+			const opslag = await opslagdata.news
 					
 			async function fadingData() { // using jquerry to make it fade and make it change to the next set of data
 				await setInterval(function () {
@@ -70,4 +88,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
  	}
 
 	LoadNews();
+
+
+
 })
