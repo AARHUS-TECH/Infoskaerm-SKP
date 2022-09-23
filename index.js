@@ -187,7 +187,7 @@ async function loadSite() {
             con.addNews(title.toString(), body.toString(), `null`, `null`)
 
         }
-        res.redirect("Admin/dashboard")
+        res.redirect("admin/dashboard")
     })
 
     app.get('/admin/users', function(req, res) {
