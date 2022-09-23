@@ -86,7 +86,7 @@ async function loadSite() {
     app.set("view engine", "pug")
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }));
-    app.use(express.static('Admin'));
+    app.use(express.static('admin'));
     app.use('/images', express.static("./frontend/images"));
     app.use('/frontend/js', express.static(path.join(__dirname, '/frontend/js')));
 
@@ -100,6 +100,8 @@ async function loadSite() {
             netstatus: net1,
         })
     })
+
+    //#region admin panel
 
     //Login site
     app.get("/login", function(req, res) {
@@ -127,8 +129,6 @@ async function loadSite() {
 
     })
 
-    
-    //#region admin panel
     app.get('/admin/', function(req, res) {
         let session = req.session
         if (session.key) {
@@ -152,8 +152,6 @@ async function loadSite() {
             res.redirect("/login")
         }
     })
-    //#endregion admin panel
-
 
     app.get('/admin/database', function(req, res) {
         let session = req.session
@@ -225,6 +223,7 @@ async function loadSite() {
 
         res.redirect("Admin/users?added=true")
     })
+    //#endregion admin panel    
 }
 
 // Host siden
