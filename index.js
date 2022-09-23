@@ -33,46 +33,46 @@ const app = express()
 
 //#region JSON api
 app.get('/getMyJSON', function(req, res) { // data træk til opslagene med json og ajax
-  var opslagdata = "*";
+        var opslagdata = "*";
 
-  db.query("SELECT * FROM news ORDER BY Startdate ASC", (err, rows,) => {
-    if (err) console.log(err); 
+        db.query("SELECT * FROM news  WHERE Active=1 ORDER BY Startdate ASC", (err, rows, ) => {
+            if (err) console.log(err);
 
-    opslagdata = '{';
-    opslagdata += '"news":[';
-    for (var i = 0; i < rows.length; i++) {   
-        opslagdata += '{';
-        opslagdata += '"header" : "'+rows[i].Header+'",';
-        opslagdata += '"body" : "'+rows[i].Body+'",';
-        opslagdata += '"startdate" : "'+rows[i].Startdate+'",';
-        opslagdata += '"enddate" : "'+rows[i].Enddate+'"';
-        opslagdata += '},';
-    };
+            opslagdata = '{';
+            opslagdata += '"news":[';
+            for (var i = 0; i < rows.length; i++) {
+                opslagdata += '{';
+                opslagdata += '"header" : "' + rows[i].Header + '",';
+                opslagdata += '"body" : "' + rows[i].Body + '",';
+                opslagdata += '"startdate" : "' + rows[i].Startdate + '",';
+                opslagdata += '"enddate" : "' + rows[i].Enddate + '"';
+                opslagdata += '},';
+            };
 
-    opslagdata = opslagdata.substring(0,(opslagdata.length)-1)
-    opslagdata += ']}';   
-    res.send(opslagdata);
-  });
-})
-//#endregion JSON api
+            opslagdata = opslagdata.substring(0, (opslagdata.length) - 1)
+            opslagdata += ']}';
+            res.send(opslagdata);
+        });
+    })
+    //#endregion JSON api
 
 
 //#region REDIS sessioncookies
 app.use(sess({
-    secret: 'WeNeedARaise',
-    store: new redisStore({
-        host: 'localhost',
-        port: 6379,
-        client: client,
-        ttl: 260
-    }),
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-        maxAge: 600000
-    }
-}))
-//#endregion REDIS sessioncookies
+        secret: 'WeNeedARaise',
+        store: new redisStore({
+            host: 'localhost',
+            port: 6379,
+            client: client,
+            ttl: 260
+        }),
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+            maxAge: 600000
+        }
+    }))
+    //#endregion REDIS sessioncookies
 
 
 var db = con.getConnection()
@@ -80,7 +80,7 @@ var db = con.getConnection()
 async function loadSite() {
     // Network Check
     net1 = await isReachable('217.116.222.48') // LAV FLERE HVIS I FÅR FLERE IP'ER
-    
+
     // view engine + public folder
     app.set("views", "frontend")
     app.set("view engine", "pug")
@@ -94,7 +94,7 @@ async function loadSite() {
     con.removeNews();
 
     // Index site
-    app.get('/', function(req, res) { 
+    app.get('/', function(req, res) {
         res.render('index.pug', {
             // sends net1 bool into the variable netstatus on index.pug
             netstatus: net1,
@@ -209,21 +209,21 @@ async function loadSite() {
     })
 
     app.post("/createUser", function(req, res) {
-        fname = req.body.fornavn
-        mname = req.body.mellemnavn
-        sname = req.body.efternavn
-        rname = req.body.role
+            fname = req.body.fornavn
+            mname = req.body.mellemnavn
+            sname = req.body.efternavn
+            rname = req.body.role
 
-        if (mname == "")
-            mname = null
-        if (rname != "user" || rname != "superuser")
-            rname = "user"
+            if (mname == "")
+                mname = null
+            if (rname != "user" || rname != "superuser")
+                rname = "user"
 
-        con.addUser(fname, mname, sname, rname, null)
+            con.addUser(fname, mname, sname, rname, null)
 
-        res.redirect("Admin/users?added=true")
-    })
-    //#endregion admin panel    
+            res.redirect("Admin/users?added=true")
+        })
+        //#endregion admin panel    
 }
 
 // Host siden
