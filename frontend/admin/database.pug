@@ -52,20 +52,10 @@ html(lang='en')
                     a Logout
         .col-md-9  
           .container_msg
-              form(action='/postnews' method="POST")
-                  label#msgtitle Opret besked
-                  label#ttitle(for='title') Titel:
-                  textarea#title(type='text', name='title', required)
-                  label#tmessage(for='msg') Besked:
-                  textarea#msg(type='text', name='msg' maxlength="200", required)
-                  input#postmsg(type='submit', value='Post message')
-                  br
-                  br
-                  br
-                  label.startbox(for='start') Start dato:
-                  input#startdato(type='date', name='msg_startdato', pattern='\d{4}-\d{2}-\d{2}', required)
-                  label.endbox(for='end') Slut dato:
-                  input#enddato(type='date', name='msg_enddato', pattern='\d{4}-\d{2}-\d{2}', required)
+              ul
+                each val in [1, 2, 3, 4, 5]
+                    li= val
+                    p(id="dbmanager")
     html
         body(onload='loadDoc()')
             #dbmanager
