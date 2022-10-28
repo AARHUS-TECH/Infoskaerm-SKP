@@ -53,9 +53,10 @@ html(lang='en')
         .col-md-9  
           .container_msg
               ul
-                each val in [1, 2, 3, 4, 5]
-                    li= val
-                    p(id="dbmanager")
+                each val in users
+                    li= test
+            p(id="dbmanager")
+            p h1= users
     html
         body(onload='loadDoc()')
             #dbmanager

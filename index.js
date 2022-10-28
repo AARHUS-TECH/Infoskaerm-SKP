@@ -155,9 +155,11 @@ async function loadSite() {
 
     app.get('/admin/database', function(req, res) {
         let session = req.session
+        var users = con.getAllUsers()
         if (session.key) {
             res.render('admin/database.pug'), {
-                userID: session.key
+                userID: session.key,
+                users: users
             }
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
@@ -188,18 +190,6 @@ async function loadSite() {
 
         }
         res.redirect("admin/dashboard")
-    })
-
-    app.get('/admin/users', function(req, res) {
-        let session = req.session
-        if (session.key) {
-            res.render('admin/users.pug'), {
-                userID: session.key
-            }
-        } else {
-            req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect("/login")
-        }
     })
 
     app.post("/logout", function(req, res) {
