@@ -156,7 +156,7 @@ async function loadSite() {
     app.get('/admin/database', function(req, res) {
         let session = req.session
         if (session.key) {
-            res.render('Admin/database.pug'), {
+            res.render('admin/database.pug'), {
                 userID: session.key
             }
         } else {
@@ -193,7 +193,7 @@ async function loadSite() {
     app.get('/admin/users', function(req, res) {
         let session = req.session
         if (session.key) {
-            res.render('Admin/users.pug'), {
+            res.render('admin/users.pug'), {
                 userID: session.key
             }
         } else {
