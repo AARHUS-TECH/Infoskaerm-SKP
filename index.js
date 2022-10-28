@@ -119,7 +119,7 @@ async function loadSite() {
                 if (err) throw err;
                 if (results.length > 0 && rows[Id].status == "superuser") {
                     req.session.key = Id;
-                    res.redirect("Admin/dashboard")
+                    res.redirect("admin/dashboard")
                 } else {
                     req.session.verificationFailed = true // Check to make sure fail message is shown
                     res.redirect("/login")
@@ -169,7 +169,7 @@ async function loadSite() {
     app.get('/admin/messagemanager.pug', function(req, res) {
         let session = req.session
         if (session.key) {
-            res.render('Admin/messagemanager.pug')
+            res.render('admin/messagemanager.pug')
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
             res.redirect("/login")
@@ -221,7 +221,7 @@ async function loadSite() {
 
             con.addUser(fname, mname, sname, rname, null)
 
-            res.redirect("Admin/users?added=true")
+            res.redirect("admin/users?added=true")
         })
         //#endregion admin panel    
 }
