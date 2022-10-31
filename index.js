@@ -193,7 +193,7 @@ async function loadSite() {
 
     app.get('/admin/database/:id', function (req, res) {
         // Connect to MySQL database.
-        var connection = con.getConnection();
+        var connection = con.getConnection()
         connection.connect();
 
         // Do the query to get data.
