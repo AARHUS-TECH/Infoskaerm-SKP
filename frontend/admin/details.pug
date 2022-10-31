@@ -58,6 +58,11 @@ html(lang='en')
             p #[strong Status::] #{person.status}
             p #[strong Id:] #{person.id}
              form(action='/changeDetails' method="POST")
-                label   (for='firstname') Firstname:
-                input #{person.firstname} (type='text', name='firstname', required)
-                input Save (type='submit', value='save')
+                  p Change Details
+                  label(for='firstname') #{person.firstname}:
+                  input(type='text', name='firstname', required)
+                  label(for='middlename') #{person.middlename}:
+                  input(type='text', name='middlename', required)
+                  label(for='lastname') #{person.lastname}:
+                  input(type='text', name='lastname', required)
+                  input(type='submit', value='Save Changes')
