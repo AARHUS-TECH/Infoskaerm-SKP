@@ -191,9 +191,9 @@ async function loadSite() {
         }
     })
 
-    app.get('/admin/database/:id', function (req, res) {
+    app.get('/person/:id', function (req, res) {
         // Connect to MySQL database.
-        var connection = con.getConnection()
+        var connection = con.getConnection();
         connection.connect();
 
         // Do the query to get data.
@@ -204,16 +204,16 @@ async function loadSite() {
                 res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
             } else {
                 // Check if the result is found or not
-                if (rows.length != null) {
+                if (rows.length == 1) {
                     // Create the object to save the data.
                     var person = {
-                        'firstname': rows[i].Fornavn,
-                        'lastname': rows[i].Efternavn,
-                        'status': rows[i].status,
-                        'id': rows[i].Id
+                        'firstname': rows[0].Fornavn,
+                        'lastname': rows[0].Efternavn,
+                        'status': rows[0].status,
+                        'id': rows[0].Id
                     }
                     // render the details.plug page.
-                    res.render('admin/details', { "person": person });
+                    res.render('admin/details', { person: person });
                 } else {
                     // render not found page
                     res.status(404).json({ "status_code": 404, "status_message": "Not found" });
@@ -224,6 +224,7 @@ async function loadSite() {
         // Close MySQL connection
         connection.end();
     });
+
 
     // admin panel
     app.get('/admin/messagemanager.pug', function(req, res) {

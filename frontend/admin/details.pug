@@ -1,10 +1,58 @@
-html
-	head
-		title= person.firstname
-	body
-		h1= person.firstname
-		article 
-			p Firstname #{person.firstname} 
-			p Lastname: #{person.lastname} 
-			p Status: #{person.status} 
-			p Id: #{person.id}
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Admin panel
+    // fontawesome cdn
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' integrity='sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous')
+    link(rel='stylesheet' href='nstatus.css')
+    
+    // my css
+
+    style
+      include ./css/textstyle.css
+    style
+      include ./css/style.css
+  body 
+    .container-test
+      .row 
+        .col-12
+          .pb-2.mt-4.mb-2.border-bottom.header
+            p AARHUSTECH
+    .container-1      
+      .row
+        .col-md-3 
+           nav#nav.navbar
+            .nav-items
+              .admin-profile
+                .icons
+                  img(src='../images/user.png' alt='admin')
+                span
+                  a Admin
+              .item-list
+                .icons
+                  a(href='dashboard.pug')
+                    i.fas.fa-tachometer-alt
+                span
+                  a(href='dashboard') Dashboard
+              .item-list
+                .icons
+                  a(href='database.pug')
+                    i.fas.fa-wallet
+                span
+                  a(href='database') Database 
+              .logout
+                .icons
+                  a(href='logout.pug')
+                    i.fas.fa-sign-out-alt
+                span
+                  form(action="logout" method="POST")
+                    a Logout
+        .col-md-9  
+          .container_msg
+            p Firstname #{person.firstname}
+            p Lastname: #{person.lastname}
+            p Status: #{person.status}
+            p Id: #{person.id}
