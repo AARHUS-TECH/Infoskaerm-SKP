@@ -57,15 +57,3 @@ html(lang='en')
                     li= users
                     li test
     html
-        body(onload='loadDoc()')
-            #dbmanager
-            script.
-              function loadDoc() {
-              const xhttp = new XMLHttpRequest();
-              xhttp.onload = function() {
-              document.getElementById("dbmanager").innerHTML =
-              this.responseText;
-              }
-              xhttp.open("GET", "users");
-              xhttp.send();
-              }

@@ -3,8 +3,10 @@
     "",
     "\\frontend",
     "\\frontend\\admin",
-    "\\frontend\\js"
+    "\\frontend\\admin\\css",
+    "\\frontend\\js",
+    "\\lib"
   ],
-  "SelectedNode": "\\frontend\\js\\index.js",
+  "SelectedNode": "\\frontend\\admin\\messagemanager.pug",
   "PreviewInSolutionExplorer": false
 }
