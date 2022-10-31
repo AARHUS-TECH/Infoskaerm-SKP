@@ -171,10 +171,10 @@ async function loadSite() {
 
                         // Create an object to save current row's data
                         var person = {
-                            'firstname': rows[i].fornavn,
-                            'lastname': rows[i].efternavn,
+                            'firstname': rows[i].Fornavn,
+                            'lastname': rows[i].Efternavn,
                             'status': rows[i].status,
-                            'id': rows[i].id
+                            'id': rows[i].Id
                         }
                         // Add object into array
                         personList.push(person);
