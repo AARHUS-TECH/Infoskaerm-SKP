@@ -191,6 +191,40 @@ async function loadSite() {
         }
     })
 
+    app.get('/admin/database/:id', function (req, res) {
+        // Connect to MySQL database.
+        var connection = con.getConnection();
+        connection.connect();
+
+        // Do the query to get data.
+        connection.query('SELECT * FROM test WHERE id = ' + req.params.id, function (err, rows, fields) {
+            var person;
+
+            if (err) {
+                res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
+            } else {
+                // Check if the result is found or not
+                if (rows.length == 1) {
+                    // Create the object to save the data.
+                    var person = {
+                        'name': rows[0].name,
+                        'address': rows[0].address,
+                        'phone': rows[0].phone,
+                        'id': rows[0].id
+                    }
+                    // render the details.plug page.
+                    res.render('admin/details', { "person": person });
+                } else {
+                    // render not found page
+                    res.status(404).json({ "status_code": 404, "status_message": "Not found" });
+                }
+            }
+        });
+
+        // Close MySQL connection
+        connection.end();
+    });
+
     // admin panel
     app.get('/admin/messagemanager.pug', function(req, res) {
         let session = req.session
