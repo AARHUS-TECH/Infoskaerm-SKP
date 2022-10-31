@@ -60,12 +60,15 @@ html(lang='en')
              form(action='/changeDetails' method="POST")
                   p Change Details
                   label(for='firstname') Firstname:
+                  <br>
                   input#firstname(type='text', name='firstname', value=person.firstname, required)
                   <br>
                   label(for='middlename') Middlename:
+                  <br>
                   input#middlename(type='text', name='middlename', value=person.middlename, required)
                   <br>
                   label(for='lastname') Lastname:
+                  <br>
                   input#lastname(type='text', name='lastname', value=person.lastname, required)
                   <br>
                   input(type='submit', value='Save Changes')
