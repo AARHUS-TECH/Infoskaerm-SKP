@@ -191,7 +191,7 @@ async function loadSite() {
         }
     })
 
-    app.get('/database/:id', function (req, res) {
+    app.get('/admin/database/:id', function (req, res) {
         // Connect to MySQL database.
         var connection = con.getConnection();
         connection.connect();
@@ -208,6 +208,7 @@ async function loadSite() {
                     // Create the object to save the data.
                     var person = {
                         'firstname': rows[0].Fornavn,
+                        'middlename': rows[0].Mellemnavn,
                         'lastname': rows[0].Efternavn,
                         'status': rows[0].status,
                         'id': rows[0].Id
