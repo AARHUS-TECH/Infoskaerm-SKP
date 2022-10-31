@@ -159,10 +159,7 @@ async function loadSite() {
         let session = req.session
         var personList = con.getAllUsers()
         if (session.key) {
-            res.render('admin/database.pug'), {
-                userID: session.key,
-                personList: personList
-            }
+            res.render('admin/database.pug', { "personList": personList }, { userID: session.key })
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
             res.redirect("/login")
