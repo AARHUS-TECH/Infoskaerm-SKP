@@ -52,10 +52,9 @@ html(lang='en')
                     a Logout
         .col-md-9  
           .container_msg
-              table
-		        for person in personList
-			        tr
-				        td= person.id
-				        td= person.name
-				        td= person.status
-    html
+            table
+                for person in personList
+                    tr
+                        td= person.id
+                            td= person.name
+                            td= person.status
