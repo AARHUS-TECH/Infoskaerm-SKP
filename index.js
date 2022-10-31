@@ -197,7 +197,7 @@ async function loadSite() {
         connection.connect();
 
         // Do the query to get data.
-        connection.query('SELECT * FROM test WHERE id = ' + req.params.id, function (err, rows, fields) {
+        connection.query('SELECT * FROM users WHERE id = ' + req.params.id, function (err, rows, fields) {
             var person;
 
             if (err) {
@@ -207,10 +207,10 @@ async function loadSite() {
                 if (rows.length == 1) {
                     // Create the object to save the data.
                     var person = {
-                        'name': rows[0].name,
-                        'address': rows[0].address,
-                        'phone': rows[0].phone,
-                        'id': rows[0].id
+                        'firstname': rows[i].Fornavn,
+                        'lastname': rows[i].Efternavn,
+                        'status': rows[i].status,
+                        'id': rows[i].Id
                     }
                     // render the details.plug page.
                     res.render('admin/details', { "person": person });
