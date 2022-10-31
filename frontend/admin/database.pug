@@ -52,8 +52,10 @@ html(lang='en')
                     a Logout
         .col-md-9  
           .container_msg
-              ul
-                each val in users
-                    li= users
-                    li test
+              table
+		        for person in personList
+			        tr
+				        td= person.id
+				        td= person.name
+				        td= person.status
     html

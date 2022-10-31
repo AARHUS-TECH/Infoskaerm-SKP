@@ -157,33 +157,12 @@ async function loadSite() {
 
     app.get('/admin/database', function(req, res) {
         let session = req.session
-        var users = con.getAllUsers()
-        var personList = []
+        var personList = con.getAllUsers()
         if (session.key) {
-
-            // Do the query to get data.
-            con.query('SELECT * FROM users', function (err, rows, fields) {
-                if (err) {
-                    res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
-                } else {
-                    // Loop check on each row
-                    for (var i = 0; i < rows.length; i++) {
-
-                        // Create an object to save current row's data
-                        var person = {
-                            'firstname': rows[i].fornavn,
-                            'lastname': rows[i].efternavn,
-                            'status': rows[i].status,
-                            'id': rows[i].id
-                        }
-                        // Add object into array
-                        personList.push(person);
-                    }
-
-                    // Render index.pug page using array 
-                    res.render('admin/database.pug', { "personList": personList });
-                }
-            });
+            res.render('admin/database.pug'), {
+                userID: session.key,
+                personList: personList
+            }
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
             res.redirect("/login")
