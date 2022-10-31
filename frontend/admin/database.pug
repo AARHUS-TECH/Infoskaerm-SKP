@@ -53,8 +53,10 @@ html(lang='en')
         .col-md-9  
           .container_msg
             table
+                p= test
                 for person in personList
                     tr
                         td= person.id
                             td= person.name
                             td= person.status
+                            
