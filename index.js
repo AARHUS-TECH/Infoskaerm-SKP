@@ -204,7 +204,7 @@ async function loadSite() {
                 res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
             } else {
                 // Check if the result is found or not
-                if (rows.length == 1) {
+                if (rows.length != null) {
                     // Create the object to save the data.
                     var person = {
                         'firstname': rows[i].Fornavn,
