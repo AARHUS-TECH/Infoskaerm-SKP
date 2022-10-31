@@ -180,9 +180,8 @@ async function loadSite() {
                         personList.push(person);
                     }
                 }
-                return personList;
+                res.render('admin/database', { personList: personList, message: 'Hello there!', userID: session.key })
             });
-            res.render('admin/database', { personList: personList, message: 'Hello there!', userID: session.key })
 
             // Close the MySQL connection
             connection.end();
