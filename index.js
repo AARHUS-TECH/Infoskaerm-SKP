@@ -1,4 +1,5 @@
 const session = require('express-session');
+const { connect } = require('net');
 
 const con = require('./lib/connection.js'),
     express = require('express'),
@@ -225,6 +226,15 @@ async function loadSite() {
         // Close MySQL connection
         connection.end();
     });
+
+    app.post('/changeDetails', function (err, req, res) {
+        var fname = req.body.first
+        var mname = req.body.mellemnavn
+        var lname = req.body.lastname
+        var id = req.params.id
+        con.editUser(`"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)
+        res.redirect("admin/database/details/")
+    })
 
 
     // admin panel
