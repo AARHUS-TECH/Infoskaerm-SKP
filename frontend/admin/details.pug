@@ -55,16 +55,17 @@ html(lang='en')
             p #[strong Id:] #{person.id}
             p #[strong Status:] #{person.status}
              form(action='/changeDetails/'+person.id method="POST")
-                  label(for='firstname') #[strong Firstname:]
-                  <br>
-                  input(type='text', name='firstname', value=person.firstname, required)
-                  <br>
-                  label(for='middlename') #[strong Middlename:]
-                  <br>
-                  input(type='text', name='middlename', value=person.middlename, required)
-                  <br>
-                  label(for='lastname') #[strong Lastname:]
-                  <br>
-                  input(type='text', name='lastname', value=person.lastname, required)
-                  <br>
-                  input(type='submit', value='Save Changes')
+                label(for='firstname') #[strong Firstname:]
+                <br>
+                input(type='text', name='firstname', value=person.firstname, required)
+                <br>
+                label(for='middlename') #[strong Middlename:]
+                <br>
+                input(type='text', name='middlename', value=person.middlename, required)
+                <br>
+                label(for='lastname') #[strong Lastname:]
+                <br>
+                input(type='text', name='lastname', value=person.lastname, required)
+                <br>
+                input(type='submit', value='Save Changes')
+            a#delete(href='/deleteUser/'+person.id): button#(type="button") Delete

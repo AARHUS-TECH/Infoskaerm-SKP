@@ -253,6 +253,23 @@ async function loadSite() {
     })
 
 
+    app.get('admin/database/deleteUser/:id', function (req, res) {
+        let session = req.session
+        var connection = con.getConnection();
+        var id = req.params.id;
+        if (session.key) {
+
+            connection.connect();
+
+            connection.query("DELETE users WHERE id=?", [id])
+
+            res.render(req.baseUrl + '/admin/database')
+        } else {
+            req.session.verificationFailed = true
+            res.redirect(req.baseUrl + 'login')
+        }
+    })
+
     // admin panel
     app.get('/admin/messagemanager.pug', function(req, res) {
         let session = req.session
