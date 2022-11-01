@@ -229,15 +229,12 @@ async function loadSite() {
     });
 
     app.post('/changeDetails/:id', function (req, res) {
-        var fname = "Jonas"
-        var mname = "Bulow"
-        var lname = "Schouu"
-        var id = 37
-        if (fname != null || mname != null)
-            con.editUser(fname.toString(), mname.toString(), lname.toString(), `"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)
-        else {
-            con.editUser(fname.toString(), mname.toString(), lname.toString(), `null`, `null`, `null`, `null`)
-        }
+        //var fname = "Jonas"
+        //var mname = "Bulow"
+        //var lname = "Schouu"
+        //var id = 37
+        con.editUser(fname.toString(), mname.toString(), lname.toString(), `"Jonaaas"`, `"Bulooow"`, `"Schoooooou"`, `"37"`)
+/*        con.editUser(fname.toString(), mname.toString(), lname.toString(), `"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)*/
         res.redirect(req.baseUrl + '/admin/database/37')
     })
 
