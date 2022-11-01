@@ -227,11 +227,11 @@ async function loadSite() {
         connection.end();
     });
 
-    app.post('/changeDetails/:id', function (err, req, res) {
-        var fname = req.body.firstname
-        var mname = req.body.middlename
-        var lname = req.body.lastname
-        var id = req.params.id
+    app.post('/changeDetails/:id', function (req, res) {
+        var fname = "Jonas"
+        var mname = "Bulow"
+        var lname = "Schouu"
+        var id = 37
         if (fname != null || mname != null)
             con.editUser(fname.toString(), mname.toString(), lname.toString(), `"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)
         else {
