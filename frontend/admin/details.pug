@@ -52,23 +52,22 @@ html(lang='en')
                     a Logout
         .col-md-9  
           .container_msg
-            p #[strong Firstname:] #{person.firstname}
-            p #[strong Middlename:] #{person.middlename}
-            p #[strong Lastname:] #{person.lastname}
-            p #[strong Status::] #{person.status}
-            p #[strong Id:] #{person.id}
+            h5 #[strong Id:] #{person.id}
              form(action='/changeDetails' method="POST")
                   p Change Details
-                  label(for='firstname') Firstname:
+                  label(for='firstname') #[strong Firstname:]
                   <br>
                   input#firstname(type='text', name='firstname', value=person.firstname, required)
                   <br>
-                  label(for='middlename') Middlename:
+                  label(for='middlename') #[strong Middlename:]
                   <br>
                   input#middlename(type='text', name='middlename', value=person.middlename, required)
                   <br>
-                  label(for='lastname') Lastname:
+                  label(for='lastname') #[strong Lastname:]
                   <br>
                   input#lastname(type='text', name='lastname', value=person.lastname, required)
                   <br>
                   input(type='submit', value='Save Changes')
+                  select
+                    option(value=superuser) Superuser
+                    option(value=user) User
