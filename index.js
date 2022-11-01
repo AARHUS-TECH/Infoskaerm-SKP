@@ -233,7 +233,7 @@ async function loadSite() {
         //var mname = "Bulow"
         //var lname = "Schouu"
         //var id = 37
-        con.editUser(fname.toString(), mname.toString(), lname.toString(), `"Jonaaas"`, `"Bulooow"`, `"Schoooooou"`, `"37"`)
+        con.editUser(`"Jonaaas"`, `"Bulooow"`, `"Schoooooou"`, `"37"`)
 /*        con.editUser(fname.toString(), mname.toString(), lname.toString(), `"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)*/
         res.redirect(req.baseUrl + '/admin/database/37')
     })
