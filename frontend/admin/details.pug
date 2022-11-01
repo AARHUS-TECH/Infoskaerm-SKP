@@ -52,9 +52,10 @@ html(lang='en')
                     a Logout
         .col-md-9  
           .container_msg
-            h5 #[strong Id:] #{person.id}
+            h5 User Details
+            p #[strong Id:] #{person.id}
+            p #[strong Status:] #{person.status}
              form(action='/changeDetails' method="POST")
-                  p Change Details
                   label(for='firstname') #[strong Firstname:]
                   <br>
                   input#firstname(type='text', name='firstname', value=person.firstname, required)
@@ -68,6 +69,3 @@ html(lang='en')
                   input#lastname(type='text', name='lastname', value=person.lastname, required)
                   <br>
                   input(type='submit', value='Save Changes')
-                  select
-                    option(value=superuser) Superuser
-                    option(value=user) User
