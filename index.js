@@ -228,7 +228,7 @@ async function loadSite() {
         connection.end();
     });
 
-    app.put('/changeDetails/:id', function (req, res) {
+    app.post('/changeDetails/:id', function (req, res) {
 
         // Connect to MySQL database.
         var connection = con.getConnection();
