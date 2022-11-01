@@ -263,7 +263,7 @@ async function loadSite() {
 
             connection.query("DELETE FROM users WHERE id=?", [id])
 
-            res.render(req.baseUrl + '/admin/database')
+            res.render('admin/database')
         } else {
             req.session.verificationFailed = true
             res.redirect(req.baseUrl + 'login')
