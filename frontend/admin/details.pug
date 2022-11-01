@@ -57,14 +57,14 @@ html(lang='en')
              form(action='/changeDetails/'+person.id method="POST")
                   label(for='firstname') #[strong Firstname:]
                   <br>
-                  input#firstname(type='text', name='firstname', value=person.firstname, required)
+                  input(type='text', name='firstname', value=person.firstname, required)
                   <br>
                   label(for='middlename') #[strong Middlename:]
                   <br>
-                  input#middlename(type='text', name='middlename', value=person.middlename, required)
+                  input(type='text', name='middlename', value=person.middlename, required)
                   <br>
                   label(for='lastname') #[strong Lastname:]
                   <br>
-                  input#lastname(type='text', name='lastname', value=person.lastname, required)
+                  input(type='text', name='lastname', value=person.lastname, required)
                   <br>
                   input(type='submit', value='Save Changes')

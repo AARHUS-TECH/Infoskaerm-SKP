@@ -232,8 +232,7 @@ async function loadSite() {
         var mname = req.body.middlename
         var lname = req.body.lastname
         var id = req.params.id
-        console.log(`"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)
-        con.editUser(`"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)
+        con.editUser(fname.toString(), mname.toString(), lname.toString(), `"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)
         res.redirect("admin/database")
     })
 
