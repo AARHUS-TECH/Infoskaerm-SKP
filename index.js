@@ -228,8 +228,8 @@ async function loadSite() {
     });
 
     app.post('/changeDetails/:id', function (err, req, res) {
-        var fname = req.body.first
-        var mname = req.body.mellemnavn
+        var fname = req.body.firstname
+        var mname = req.body.middlename
         var lname = req.body.lastname
         var id = req.params.id
         console.log(`"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)
