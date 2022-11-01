@@ -228,12 +228,27 @@ async function loadSite() {
         connection.end();
     });
 
-    app.post('/changeDetails/:id', function (req, res) {
-        var fname = "Jonassss"
-        var mname = "Bulowwww"
-        var lname = "Schouuuuu"
-        var id = 37
-        con.editUser(`'${fname}'`, `'${mname}'`, `'${lname}'`, `'${id}'`)
+    app.put('/changeDetails/:id', function (req, res) {
+
+        // Connect to MySQL database.
+        var connection = con.getConnection();
+
+        // Local Variabels
+        var fname = req.body.firstname;
+        var mname = req.body.middlename;
+        var lname = req.body.lastname;
+        var id = req.params.id;
+
+        connection.connect();
+
+        connection.query('UPDATE users SET Fornavn=?,mellemnavn=?,Efternavn=? WHERE id=?', [fname, mname, lname, id], (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send("UPDATED")
+            }
+        })
+
         res.redirect(req.baseUrl + '/admin/database/37')
     })
 
