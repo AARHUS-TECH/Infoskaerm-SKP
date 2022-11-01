@@ -253,7 +253,7 @@ async function loadSite() {
     })
 
 
-    app.get('admin/database/deleteUser/:id', function (req, res) {
+    app.post('admin/database/deleteUser/:id', function (req, res) {
         let session = req.session
         var connection = con.getConnection();
         var id = req.params.id;
@@ -261,7 +261,7 @@ async function loadSite() {
 
             connection.connect();
 
-            connection.query("DELETE users WHERE id=?", [id])
+            connection.query("DELETE FROM users WHERE id=?", [id])
 
             res.render(req.baseUrl + '/admin/database')
         } else {
