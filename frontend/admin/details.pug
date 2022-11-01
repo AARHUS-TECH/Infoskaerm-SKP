@@ -54,7 +54,7 @@ html(lang='en')
           .container_msg
             p #[strong Id:] #{person.id}
             p #[strong Status:] #{person.status}
-             form(action='/changeDetails' method="POST")
+             form(action='/changeDetails'+person.id method="POST")
                   label(for='firstname') #[strong Firstname:]
                   <br>
                   input#firstname(type='text', name='firstname', value=person.firstname, required)

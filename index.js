@@ -227,7 +227,7 @@ async function loadSite() {
         connection.end();
     });
 
-    app.post('/changeDetails', function (err, req, res) {
+    app.post('/changeDetails/:id', function (err, req, res) {
         var fname = req.body.first
         var mname = req.body.mellemnavn
         var lname = req.body.lastname
