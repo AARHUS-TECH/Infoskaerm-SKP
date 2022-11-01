@@ -233,7 +233,7 @@ async function loadSite() {
         var lname = req.body.lastname
         var id = req.params.id
         con.editUser(`"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)
-        res.redirect("admin/database/details/")
+        res.redirect("admin/database")
     })
 
 
