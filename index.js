@@ -238,7 +238,6 @@ async function loadSite() {
         else {
             con.editUser(fname.toString(), mname.toString(), lname.toString(), `null`, `null`, `null`, `null`)
         }
-        res.redirect("admin/database")
     })
 
 
