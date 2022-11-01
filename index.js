@@ -241,7 +241,7 @@ async function loadSite() {
 
         connection.connect();
 
-        connection.query("UPDATE users SET Fornavn=?,mellemnavn=?,Efternavn=? WHERE id=?",["Jonas","Bulow","Schou", 37], (err, result) => {
+        connection.query("UPDATE users SET Fornavn=?,mellemnavn=?,Efternavn=? WHERE id=?",[fname,mname,lname, id], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
