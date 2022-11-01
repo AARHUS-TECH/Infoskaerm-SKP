@@ -60,5 +60,6 @@ html(lang='en')
                         td= person.firstname
                         td= person.lastname
                         td= person.status
-                        a(href='/admin/database/'+person.id) Edit
+                        td
+                            a(href='/admin/database/'+person.id): button(type="button") Edit
                             
