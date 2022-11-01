@@ -173,6 +173,7 @@ async function loadSite() {
                         // Create an object to save current row's data
                         var person = {
                             'firstname': rows[i].Fornavn,
+                            'middlename': rows[i].mellemnavn,
                             'lastname': rows[i].Efternavn,
                             'status': rows[i].status,
                             'id': rows[i].Id
