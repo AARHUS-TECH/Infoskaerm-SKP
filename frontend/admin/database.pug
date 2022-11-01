@@ -57,8 +57,9 @@ html(lang='en')
                 for person in personList
                     tr
                         td= person.id
-                        td
+                        td= person.firstname
                             a(href='/admin/database/'+person.id) #{person.firstname}
                         td= person.lastname
                         td= person.status
+                        a(href='/admin/database/'+person.id): button(type="button") Edit
                             
