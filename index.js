@@ -253,7 +253,7 @@ async function loadSite() {
     })
 
 
-    app.get('deleteUser/:id', function (req, res) {
+    app.get('/deleteUser/:id', function (req, res) {
         let session = req.session
         var connection = con.getConnection();
         var id = req.params.id;
