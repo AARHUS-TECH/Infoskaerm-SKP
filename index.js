@@ -229,12 +229,11 @@ async function loadSite() {
     });
 
     app.post('/changeDetails/:id', function (req, res) {
-        //var fname = "Jonas"
-        //var mname = "Bulow"
-        //var lname = "Schouu"
-        //var id = 37
-        con.editUser(`"Jonaaas"`, `"Bulooow"`, `"Schoooooou"`, `"37"`)
-/*        con.editUser(fname.toString(), mname.toString(), lname.toString(), `"${fname}"`, `"${mname}"`, `"${lname}"`, `"${id}"`)*/
+        var fname = Jonassss
+        var mname = Bulowwww
+        var lname = Schouuuuu
+        var id = 37
+        con.editUser(`'${fname}'`, `'${mname}'`, `'${lname}'`, `'${id}'`)
         res.redirect(req.baseUrl + '/admin/database/37')
     })
 
