@@ -63,11 +63,11 @@ html(lang='en')
                 <br>
                 label(for='startdato') #[strong Start date:]
                 <br>
-                input(type='date', name='startdato', value=news.startdate, pattern='\d{4}-\d{2}-\d{2}', required)
+                input(type='date', name='startdato', value=news.startdate, required)
                 <br>
                 label(for='enddato') #[strong End date:]
                 <br>
-                input(type='date', name='enddato', value=news.enddate, pattern='\d{4}-\d{2}-\d{2}', required)
+                input(type='date', name='enddato', value=news.enddate, required)
                 <br>
                 input(type='submit', value='Save Changes')
             a#delete(href='/deleteNews/'+news.id): button(type="button") Delete
