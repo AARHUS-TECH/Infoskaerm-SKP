@@ -303,7 +303,7 @@ async function loadSite() {
                         'middlename': rows[0].mellemnavn,
                         'lastname': rows[0].Efternavn,
                         'status': rows[0].status,
-                        'id': rows[0].Id
+                        'id': rows[0].ID
                     }
                     // render the details.plug page.
                     res.render('admin/newsDetails', { person: person });
