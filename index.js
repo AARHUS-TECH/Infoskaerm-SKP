@@ -354,7 +354,7 @@ async function loadSite() {
             if (err) {
                 console.log(err)
             } else {
-                res.send(startdate, enddate)
+                res.send(`"${startdate}"` `"${enddate}"`)
             }
         })
 
