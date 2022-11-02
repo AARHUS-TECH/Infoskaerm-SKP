@@ -156,115 +156,186 @@ async function loadSite() {
         }
     })
 
-    app.get('/admin/database/news', function (req, res) {
+    // DATABASE USERS & NEWS
+
+    app.get('/admin/database', function (req, res) {
         let session = req.session
-        var connection = con.getConnection()
-        connection.connect();
-
         if (session.key) {
-            var newsList = []
-            connection.query("SELECT * FROM news", (err, rows, fields) => {
-                if (err) {
-                    res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
-                } else {
-                    // Loop check on each row
-                    for (var i = 0; i < rows.length; i++) {
-
-                        // Create an object to save current row's data
-                        var news = {
-                            'enddate': rows[i].Enddate,
-                            'startdate': rows[i].Startdate,
-                            'body': rows[i].Body,
-                            'header': rows[i].Header,
-                            'id': rows[i].Id
-                        }
-                        // Add object into array
-                        newsList.push(news);
-                    }
-                }
-                res.render('admin/database/news', { newsList: newsList, userID: session.key })
-            });
-
-            // Close the MySQL connection
-            connection.end();
-        } else {
-            req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect("/login")
-        }
-    })
-
-
-    app.get('/admin/database/users', function(req, res) {
-        let session = req.session
-        var connection = con.getConnection()
-        connection.connect();
-
-        if (session.key) {
-            var personList = []
-            connection.query("SELECT * FROM users", (err, rows, fields) => {
-                if (err) {
-                    res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
-                } else {
-                    // Loop check on each row
-                    for (var i = 0; i < rows.length; i++) {
-
-                        // Create an object to save current row's data
-                        var person = {
-                            'firstname': rows[i].Fornavn,
-                            'middlename': rows[i].mellemnavn,
-                            'lastname': rows[i].Efternavn,
-                            'status': rows[i].status,
-                            'id': rows[i].Id
-                        }
-                        // Add object into array
-                        personList.push(person);
-                    }
-                }
-                res.render('admin/database/users', { personList: personList, userID: session.key })
-            });
-
-            // Close the MySQL connection
-            connection.end();
-        } else {
-            req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect("/login")
-        }
-    })
-
-    app.get('/admin/database/users/:id', function (req, res) {
-        // Connect to MySQL database.
-        var connection = con.getConnection();
-        connection.connect();
-
-        // Do the query to get data.
-        connection.query('SELECT * FROM users WHERE id = ' + req.params.id, function (err, rows, fields) {
-            var person;
-
-            if (err) {
-                res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
-            } else {
-                // Check if the result is found or not
-                if (rows.length == 1) {
-                    // Create the object to save the data.
-                    var person = {
-                        'firstname': rows[0].Fornavn,
-                        'middlename': rows[0].mellemnavn,
-                        'lastname': rows[0].Efternavn,
-                        'status': rows[0].status,
-                        'id': rows[0].Id
-                    }
-                    // render the details.plug page.
-                    res.render('admin/details', { person: person });
-                } else {
-                    // render not found page
-                    res.status(404).json({ "status_code": 404, "status_message": "Not found" });
-                }
+            res.render('admin/database'), {
+                userID: session.key
             }
+        } else {
+            req.session.verificationFailed = true // Check to make sure fail message is shown
+            res.redirect("/login")
+        }
+    })
+
+        // DATABASE USERS
+
+        app.get('/admin/database/users', function(req, res) {
+            let session = req.session
+            var connection = con.getConnection()
+            connection.connect();
+
+            if (session.key) {
+                var personList = []
+                connection.query("SELECT * FROM users", (err, rows, fields) => {
+                    if (err) {
+                        res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
+                    } else {
+                        // Loop check on each row
+                        for (var i = 0; i < rows.length; i++) {
+
+                            // Create an object to save current row's data
+                            var person = {
+                                'firstname': rows[i].Fornavn,
+                                'middlename': rows[i].mellemnavn,
+                                'lastname': rows[i].Efternavn,
+                                'status': rows[i].status,
+                                'id': rows[i].Id
+                            }
+                            // Add object into array
+                            personList.push(person);
+                        }
+                    }
+                    res.render('admin/database/users', { personList: personList, userID: session.key })
+                });
+
+                // Close the MySQL connection
+                connection.end();
+            } else {
+                req.session.verificationFailed = true // Check to make sure fail message is shown
+                res.redirect("/login")
+            }
+        })
+
+        app.get('/admin/database/users/:id', function (req, res) {
+            // Connect to MySQL database.
+            var connection = con.getConnection();
+            connection.connect();
+
+            // Do the query to get data.
+            connection.query('SELECT * FROM users WHERE id = ' + req.params.id, function (err, rows, fields) {
+                var person;
+
+                if (err) {
+                    res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
+                } else {
+                    // Check if the result is found or not
+                    if (rows.length == 1) {
+                        // Create the object to save the data.
+                        var person = {
+                            'firstname': rows[0].Fornavn,
+                            'middlename': rows[0].mellemnavn,
+                            'lastname': rows[0].Efternavn,
+                            'status': rows[0].status,
+                            'id': rows[0].Id
+                        }
+                        // render the details.plug page.
+                        res.render('admin/details', { person: person });
+                    } else {
+                        // render not found page
+                        res.status(404).json({ "status_code": 404, "status_message": "Not found" });
+                    }
+                }
+            });
+
+            // Close MySQL connection
+            connection.end();
+        })
+
+        // DATABASE NEWS
+
+        app.get('/admin/database/news', function (req, res) {
+            let session = req.session
+            var connection = con.getConnection()
+            connection.connect();
+
+            if (session.key) {
+                var newsList = []
+                connection.query("SELECT * FROM news", (err, rows, fields) => {
+                    if (err) {
+                        res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
+                    } else {
+                        // Loop check on each row
+                        for (var i = 0; i < rows.length; i++) {
+
+                            // Create an object to save current row's data
+                            var news = {
+                                'enddate': rows[i].Enddate,
+                                'startdate': rows[i].Startdate,
+                                'body': rows[i].Body,
+                                'header': rows[i].Header,
+                                'id': rows[i].Id
+                            }
+                            // Add object into array
+                            newsList.push(news);
+                        }
+                    }
+                    res.render('admin/database/news', { newsList: newsList, userID: session.key })
+                });
+
+                // Close the MySQL connection
+                connection.end();
+            } else {
+                req.session.verificationFailed = true // Check to make sure fail message is shown
+                res.redirect("/login")
+            }
+        })
+
+        app.get('/admin/database/news/:id', function (req, res) {
+            // Connect to MySQL database.
+            var connection = con.getConnection();
+            connection.connect();
+
+            // Do the query to get data.
+            connection.query('SELECT * FROM news WHERE id = ' + req.params.id, function (err, rows, fields) {
+                var person;
+
+                if (err) {
+                    res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
+                } else {
+                    // Check if the result is found or not
+                    if (rows.length == 1) {
+                        // Create the object to save the data.
+                        var person = {
+                            'firstname': rows[0].Fornavn,
+                            'middlename': rows[0].mellemnavn,
+                            'lastname': rows[0].Efternavn,
+                            'status': rows[0].status,
+                            'id': rows[0].Id
+                        }
+                        // render the details.plug page.
+                        res.render('admin/details', { person: person });
+                    } else {
+                        // render not found page
+                        res.status(404).json({ "status_code": 404, "status_message": "Not found" });
+                    }
+                }
+            });
+
+            // Close MySQL connection
+            connection.end();
         });
 
-        // Close MySQL connection
-        connection.end();
-    });
+    // USER CHANGE
+
+    app.get('/deleteUser/:id', function (req, res) {
+        let session = req.session
+        var connection = con.getConnection();
+        var id = req.params.id;
+        if (session.key) {
+
+            connection.connect();
+
+            connection.query("DELETE FROM users WHERE id=?", [id])
+
+            res.render('admin/database')
+        } else {
+            req.session.verificationFailed = true
+            res.redirect(req.baseUrl + 'login')
+        }
+    })
 
     app.post('/changeDetails/:id', function (req, res) {
 
@@ -290,23 +361,23 @@ async function loadSite() {
         res.redirect(req.baseUrl + '/admin/database/:id')
     })
 
+    app.post("/createUser", function(req, res) {
+            fname = req.body.fornavn
+            mname = req.body.mellemnavn
+            sname = req.body.efternavn
+            rname = req.body.role
 
-    app.get('/deleteUser/:id', function (req, res) {
-        let session = req.session
-        var connection = con.getConnection();
-        var id = req.params.id;
-        if (session.key) {
+            if (mname == "")
+                mname = null
+            if (rname != "user" || rname != "superuser")
+                rname = "user"
 
-            connection.connect();
+            con.addUser(fname, mname, sname, rname, null)
 
-            connection.query("DELETE FROM users WHERE id=?", [id])
+            res.redirect("admin/users?added=true")
+    })  
 
-            res.render('admin/database')
-        } else {
-            req.session.verificationFailed = true
-            res.redirect(req.baseUrl + 'login')
-        }
-    })
+
 
     app.post('/postnews', function(req, res) {
         var title = req.body.title
@@ -328,22 +399,6 @@ async function loadSite() {
         });
     })
 
-    app.post("/createUser", function(req, res) {
-            fname = req.body.fornavn
-            mname = req.body.mellemnavn
-            sname = req.body.efternavn
-            rname = req.body.role
-
-            if (mname == "")
-                mname = null
-            if (rname != "user" || rname != "superuser")
-                rname = "user"
-
-            con.addUser(fname, mname, sname, rname, null)
-
-            res.redirect("admin/users?added=true")
-        })
-        //#endregion admin panel    
 }
 
 // Host siden
