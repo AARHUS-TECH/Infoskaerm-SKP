@@ -198,7 +198,7 @@ async function loadSite() {
                             personList.push(person);
                         }
                     }
-                    res.render('admin/users', { personList: personList, userID: session.key })
+                    res.render('admin/users.pug', { personList: personList, userID: session.key })
                 });
 
                 // Close the MySQL connection
@@ -272,7 +272,7 @@ async function loadSite() {
                         newsList.push(news);
                     }
                 }
-                res.render('admin/news', { newsList: newsList, userID: session.key })
+                res.render('admin/news.pug', { newsList: newsList, userID: session.key })
             });
 
             // Close the MySQL connection
