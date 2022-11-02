@@ -62,9 +62,12 @@ html(lang='en')
                 <br>
                 input(type='text', name='body', value=news.body, required)
                 <br>
-                label.startbox(for='startdato') Start date:
-                input#startdato(type='date', name='startdato', value=news.startdate, pattern='\d{4}-\d{2}-\d{2}', required)
-                label.endbox(for='enddato') End date:
-                input#enddato(type='date', name='enddato', value=news.enddate, pattern='\d{4}-\d{2}-\d{2}', required)
+                label(for='startdato') #[strong Start date:]
+                <br>
+                input(type='date', name='startdato', value=news.startdate, pattern='\d{4}-\d{2}-\d{2}', required)
+                <br>
+                label(for='enddato') #[strong End date:]
+                input(type='date', name='enddato', value=news.enddate, pattern='\d{4}-\d{2}-\d{2}', required)
+                <br>
                 input(type='submit', value='Save Changes')
             a#delete(href='/deleteNews/'+news.id): button(type="button") Delete
