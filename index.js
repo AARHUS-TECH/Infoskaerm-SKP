@@ -290,7 +290,7 @@ async function loadSite() {
 
         // Do the query to get data.
         connection.query('SELECT * FROM news WHERE id = ' + req.params.id, function (err, rows, fields) {
-            var person;
+            var news;
 
             if (err) {
                 res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
@@ -298,15 +298,15 @@ async function loadSite() {
                 // Check if the result is found or not
                 if (rows.length == 1) {
                     // Create the object to save the data.
-                    var person = {
-                        'firstname': rows[0].Fornavn,
-                        'middlename': rows[0].mellemnavn,
-                        'lastname': rows[0].Efternavn,
-                        'status': rows[0].status,
+                    var news = {
+                        'enddate': rows[0].Enddate,
+                        'startdate': rows[0].Startdate,
+                        'body': rows[0].Body,
+                        'header': rows[0].Header,
                         'id': rows[0].ID
                     }
                     // render the details.plug page.
-                    res.render('admin/newsDetails', { person: person });
+                    res.render('admin/newsDetails', { news: news });
                 } else {
                     // render not found page
                     res.status(404).json({ "status_code": 404, "status_message": "Not found" });
