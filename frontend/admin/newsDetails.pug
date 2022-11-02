@@ -52,20 +52,19 @@ html(lang='en')
                     a Logout
         .col-md-9  
           .container_msg
-            p #[strong Id:] #{person.id}
-            p #[strong Status:] #{person.status}
-             form(action='/changeDetails/'+person.id method="POST")
-                label(for='firstname') #[strong Firstname:]
+            p #[strong Id:] #{news.id}
+             form(action='/changeNewsDetails/'+news.id method="POST")
+                label(for='header') #[strong Header:]
                 <br>
-                input(type='text', name='firstname', value=person.firstname, required)
+                Input(type='text', name='header', value=news.header, required)
                 <br>
-                label(for='middlename') #[strong Middlename:]
+                label(for='body') #[strong Body:]
                 <br>
-                input(type='text', name='middlename', value=person.middlename)
+                textarea(type='text', name='body', value=news.body required)
                 <br>
-                label(for='lastname') #[strong Lastname:]
-                <br>
-                input(type='text', name='lastname', value=person.lastname, required)
-                <br>
+                label.startbox(for='startdato') Start date:
+                input#startdato(type='date', name='startdato', value=news.startdate, pattern='\d{4}-\d{2}-\d{2}', required)
+                label.endbox(for='enddato') End date:
+                input#enddato(type='date', name='enddato', value=news.enddate, pattern='\d{4}-\d{2}-\d{2}', required)
                 input(type='submit', value='Save Changes')
-            a#delete(href='/deleteUser/'+person.id): button(type="button") Delete
+            a#delete(href='/deleteNews/'+news.id): button(type="button") Delete

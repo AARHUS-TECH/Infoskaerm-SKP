@@ -266,7 +266,7 @@ async function loadSite() {
                             'startdate': rows[i].Startdate,
                             'body': rows[i].Body,
                             'header': rows[i].Header,
-                            'id': rows[i].Id
+                            'id': rows[i].ID
                         }
                         // Add object into array
                         newsList.push(news);
