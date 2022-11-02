@@ -249,7 +249,7 @@ async function loadSite() {
             }
         })
 
-        res.redirect(req.baseUrl + '/admin/database/37')
+        res.redirect(req.baseUrl + '/admin/database/:id')
     })
 
 
