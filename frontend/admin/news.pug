@@ -52,12 +52,14 @@ html(lang='en')
                     a Logout
         .col-md-9  
           .container_msg
-            .icons
-                img(src='../images/user.png' alt='admin')
-                span
-                  a(href='users') Users
-            .icons
-                img(src='../images/user.png' alt='admin')
-                span
-                  a(href='news') News
+            table
+                for news in newsList
+                    tr
+                        td= news.id
+                        td= news.header
+                        td= news.body
+                        td= news.startdate
+                        td= news.enddate
+                        td
+                            a(href='/admin/database/news'+news.id): button(type="button") Edit
                             
