@@ -350,7 +350,10 @@ async function loadSite() {
 
         connection.connect();
 
-        connection.query("UPDATE news SET Header=?,Body=?,Startdate=?,Enddate=? WHERE id=?", [header, body, startdate, enddate, id], (err, result) => {
+        console.log(startdate)
+        console.log(enddate)
+
+        connection.query("UPDATE news SET Header=?,Body=?,Startdate=?,Enddate=?, Active=1 WHERE id=?", [header, body, startdate, enddate, id], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
@@ -358,7 +361,7 @@ async function loadSite() {
             }
         })
 
-        res.redirect(req.baseUrl + '/admin/database/news/:id')
+        //res.redirect(req.baseUrl + '/admin/database/news/:id')
     })
 
     // USER CHANGE
