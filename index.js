@@ -350,14 +350,11 @@ async function loadSite() {
 
         connection.connect();
 
-        console.log(startdate)
-        console.log(enddate)
-
         connection.query("UPDATE news SET Header=?,Body=?,Startdate=?,Enddate=?, Active=1 WHERE id=?", [header, body, startdate, enddate, id], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
-                res.send("NEWS UPDATED")
+                res.send(startdate, enddate)
             }
         })
 
