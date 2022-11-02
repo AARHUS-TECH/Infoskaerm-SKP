@@ -270,17 +270,6 @@ async function loadSite() {
         }
     })
 
-    // admin panel
-    app.get('/admin/messagemanager.pug', function(req, res) {
-        let session = req.session
-        if (session.key) {
-            res.render('admin/messagemanager.pug')
-        } else {
-            req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect("/login")
-        }
-    })
-
     app.post('/postnews', function(req, res) {
         var title = req.body.title
         var body = req.body.msg
