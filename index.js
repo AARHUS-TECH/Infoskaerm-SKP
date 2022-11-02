@@ -1,5 +1,6 @@
 const session = require('express-session');
 const { connect } = require('net');
+const { start } = require('repl');
 
 const con = require('./lib/connection.js'),
     express = require('express'),
@@ -316,7 +317,49 @@ async function loadSite() {
 
             // Close MySQL connection
             connection.end();
-        });
+    });
+
+    app.get('/deleteNews/:id', function (req, res) {
+        let session = req.session
+        var connection = con.getConnection();
+        var id = req.params.id;
+        if (session.key) {
+
+            connection.connect();
+
+            connection.query("DELETE FROM news WHERE id=?", [id])
+
+            res.render('admin/database')
+        } else {
+            req.session.verificationFailed = true
+            res.redirect(req.baseUrl + 'login')
+        }
+    })
+
+    app.post('/changeNewsDetails/:id', function (req, res) {
+
+        // Connect to MySQL database.
+        var connection = con.getConnection();
+
+        // Local Variabels
+        var header = req.body.header;
+        var body = req.body.body;
+        var startdate = req.body.startdate;
+        var enddate = req.body.enddate;
+        var id = req.params.id;
+
+        connection.connect();
+
+        connection.query("UPDATE news SET Header=?,Body=?,Startdate=?,Enddate=? WHERE id=?", [header, body, startdate, enddate, id], (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send("NEWS UPDATED")
+            }
+        })
+
+        res.redirect(req.baseUrl + '/admin/database/news/:id')
+    })
 
     // USER CHANGE
 
@@ -358,7 +401,7 @@ async function loadSite() {
             }
         })
 
-        res.redirect(req.baseUrl + '/admin/database/:id')
+        res.redirect(req.baseUrl + '/admin/database/users/:id')
     })
 
     app.post("/createUser", function(req, res) {
@@ -376,8 +419,6 @@ async function loadSite() {
 
             res.redirect("admin/users?added=true")
     })  
-
-
 
     app.post('/postnews', function(req, res) {
         var title = req.body.title
