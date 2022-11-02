@@ -51,13 +51,8 @@ html(lang='en')
                   form(action="logout" method="POST")
                     a Logout
         .col-md-9  
-          .container_msg
-            .icons
-                img(src='../images/user.png' alt='admin')
-                span
-                  a(href='users') Users
-            .icons
-                img(src='../images/user.png' alt='admin')
-                span
-                  a(href='news') News
+          .container_msgs
+            a(href='/news') News
+            a(href='/users') Users
+
                             
