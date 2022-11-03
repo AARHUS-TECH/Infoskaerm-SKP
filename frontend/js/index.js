@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		var xhttp = new XMLHttpRequest();  // XMLHttpRequest gives typeError, but its has noget run in to any problems
 		xhttp.onload = async function() {
 			
-			const svar = await xhttp.responseText; b
+			const svar = await xhttp.responseText;
 			const opslagdata = await JSON.stringify(svar)
 			const opslag = await opslagdata.news
 					
