@@ -53,8 +53,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		xhttp.onload = async function() {
 			
 			const svar = await xhttp.responseText;
-			const opslagdata = await JSON.stringify(svar)
+
+			console.log(svar)
+
+			const opslagdata = await JSON.parse(svar)
+
+			console.log(opslagdata)
+
 			const opslag = await opslagdata.news
+
+			console.log(opslagdata.news)
 					
 			async function fadingData() { // using jquerry to make it fade and make it change to the next set of data
 				await setInterval(function () {
