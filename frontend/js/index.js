@@ -72,9 +72,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					$(".enddateholder").data("enddate", endnumber == opslag.length - 1 ? 0 : endnumber + 1).html(opslag[endnumber].enddate);
 						
 					$(".info_titeltext,.info_text").fadeIn(500).delay(10000).fadeOut(500);
-					
-					console.log(n)
-					console.log("[" + (new Date().getTime() - timer) / 1000 + "s]")
+
+					console.log(opslag[bodynumber].header)
+					console.log(opslag[bodynumber].body)
+
+					//console.log(n)
+					//console.log("[" + (new Date().getTime() - timer) / 1000 + "s]")
 					
 				}, 11100);
 				
