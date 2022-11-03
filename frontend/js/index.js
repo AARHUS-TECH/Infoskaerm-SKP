@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			fadingData();
   		};
 		  
-		xhttp.open("GET", "http://localhost:3000/getMyJSON/", true);
+		xhttp.open("GET", "/getMyJSON/", true);
 		xhttp.send();
  	}
 
