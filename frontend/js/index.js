@@ -52,8 +52,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		var xhttp = new XMLHttpRequest();  // XMLHttpRequest gives typeError, but its has noget run in to any problems
 		xhttp.onload = async function() {
 			
-		 	const svar = await xhttp.responseText;
-			const opslagdata = await JSON.parse(svar)
+			const svar = await xhttp.responseText; b
+			const opslagdata = await JSON.stringify(svar)
 			const opslag = await opslagdata.news
 					
 			async function fadingData() { // using jquerry to make it fade and make it change to the next set of data
