@@ -67,6 +67,11 @@
     margin: 40px 0;
 }
 
+.dataicons img {
+    width: 40px;
+    height: 40px;
+}
+
 .icons img {
   width: 40px;
   height: 40px;
