@@ -3,10 +3,8 @@
     "",
     "\\frontend",
     "\\frontend\\admin",
-    "\\frontend\\css",
-    "\\frontend\\js",
     "\\lib"
   ],
-  "SelectedNode": "\\frontend\\admin\\css",
+  "SelectedNode": "\\frontend\\admin\\news.pug",
   "PreviewInSolutionExplorer": false
 }
