@@ -112,13 +112,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		console.log(newsCounter);
 
 		// If newsCounter is less of equal than (3) display block and ++
-		if (newsCounter +1 < info.length) {
-			$('.info-' + newsCounter).css('display', 'block');
+		if (newsCounter < info.length) {
 			newsCounter++;
 		} else {
 			newsCounter = 0;
 		}
 
+		$('.info-' + newsCounter).css('display', 'block');
 
 	}
 	setInterval(fadingData, 11100);
