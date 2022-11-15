@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	//LoadNews();
 
-	var newsCounter = 1;
+	var newsCounter = 0;
 	$('.info').css('display', 'none');
 
 	async function fadingData() {
@@ -108,8 +108,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		console.log(newsCounter);
 
-		if (newsCounter > ($('.info').length)) {
-			newsCounter = 1;
+		if (newsCounter >= ($('.info').length)) {
+			newsCounter = 0;
 		} else {
 			$('.info-' + newsCounter).css('display', 'block');
 			newsCounter++;
