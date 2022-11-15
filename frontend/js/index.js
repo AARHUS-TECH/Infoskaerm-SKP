@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	//LoadNews();
 
+	$('.info').css('display', 'none');
 
 
 })
