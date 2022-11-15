@@ -33,7 +33,7 @@ p#netvaerksstatus.netvaerksstatus Netv&aelig;rksstatus
 div.center
   // div til de to bokse
   for news, index in newsList
-      div(class=["info", "info"+index])
+      div(class=["info", "info-"+index])
         div.info_titelbox
           .info_titeltext
           p= news.header
