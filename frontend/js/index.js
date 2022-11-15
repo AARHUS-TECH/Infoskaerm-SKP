@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		$('.info').css('display', 'none');
 
 		console.log(newsCounter);
+		console.log(($('.info').length))
 
 		if (newsCounter >= ($('.info').length)) {
 			newsCounter = 0;
