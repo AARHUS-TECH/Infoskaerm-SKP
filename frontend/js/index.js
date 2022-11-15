@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		console.log(newsCounter);
 
 		// If newsCounter is less of equal than (3) display block and ++
-		if (newsCounter -1 < info.length) {
+		if (newsCounter +1 < info.length) {
 			$('.info-' + newsCounter).css('display', 'block');
 			newsCounter++;
 		} else {
