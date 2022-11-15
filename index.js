@@ -101,7 +101,7 @@ async function loadSite() {
         var connection = con.getConnection()
         connection.connect();
         var newsList = []
-        connection.query("SELECT * FROM news", (err, rows) => {
+        connection.query("SELECT * FROM news WHERE Active=1 ORDER BY Startdate ASC", (err, rows) => {
             if (err) {
                 res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
             } else {
