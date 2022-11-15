@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		console.log(newsCounter);
 		console.log(($('.info').length -1))
 
-		if (newsCounter >= ($('.info').length -1)) {
+		if (newsCounter > ($('.info').length -1)) {
 			newsCounter = 0;
 		} else {
 			$('.info-' + newsCounter).css('display', 'block');
