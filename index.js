@@ -30,7 +30,6 @@ var verificationFailed = false
 // NIX PILLE
 loadSite()
 setInterval(loadSite, 10000) // 10000ms, website live reloads every 10 seconds
-var personList = []
 
 // Create the Express application object
 const app = express()
