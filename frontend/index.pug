@@ -32,9 +32,8 @@ div.clock.klokken
 p#netvaerksstatus.netvaerksstatus Netv&aelig;rksstatus
 div.center
   // div til de to bokse
-  for news in newsList
-    div(class= news.i)
-      div.info
+  for news, index in newsList
+      div(class=["info", "info"+index])
         div.info_titelbox
           .info_titeltext
           p= news.header
