@@ -100,7 +100,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	//LoadNews();
 
-	$('.info').css('display', 'none');
 
+	setInterval(function () {
+		$('.info').css('display', 'none')
+	}, 11100);
+
+	$('.info').css('display', 'block');
 
 })
