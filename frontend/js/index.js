@@ -46,12 +46,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	// Infinite loop by timer
 	setInterval(clock, 1000);
-
-	async function getData() {
-		fetch('')
-    }
-
-	getData();
 	
 	//async function LoadNews() { 
 	//	var xhttp = new XMLHttpRequest();  // XMLHttpRequest gives typeError, but its has noget run in to any problems
