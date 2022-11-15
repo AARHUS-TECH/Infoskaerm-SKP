@@ -102,14 +102,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	var newsCounter = 0;
 	$('.info').css('display', 'none');
+	$('.info-0').css('display', 'block');
+	console.log(($('.info').length -1))
 
 	async function fadingData() {
 		$('.info').css('display', 'none');
 
 		console.log(newsCounter);
-		console.log(($('.info').length -1))
 
-		if (newsCounter > ($('.info').length -1)) {
+		if (newsCounter >= ($('.info').length -1)) {
 			newsCounter = 0;
 		} else {
 			$('.info-' + newsCounter).css('display', 'block');
