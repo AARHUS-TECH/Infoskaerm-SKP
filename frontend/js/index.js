@@ -100,22 +100,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	//LoadNews();
 
-	var newsCounter = 0;
-	$('.info').css('display', 'none');
-	$('.info-0').css('display', 'block');
-	console.log(($('.info').length -1))
+	var newsCounter = 1;
+	var info = $('.info');
+	info.css('display', 'none');
+	info.css('display', 'block');
+	console.log((info.length -1))
 
 	async function fadingData() {
-		$('.info').css('display', 'none');
+		info.css('display', 'none');
 
 		console.log(newsCounter);
 
-		if (newsCounter >= ($('.info').length -1)) {
-			newsCounter = 0;
-		} else {
+		if (newsCounter <= info.length - 1) {
 			$('.info-' + newsCounter).css('display', 'block');
 			newsCounter++;
-		}
+		} else {
+			newsCounter = 0;
+        }
 
 
 	}
