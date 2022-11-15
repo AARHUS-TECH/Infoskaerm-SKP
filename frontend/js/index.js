@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	//LoadNews();
 
 	var newsCounter = 1;
+	$('.info').css('display', 'none');
 
 	async function fadingData() {
 		$('.info').css('display', 'none');
@@ -110,10 +111,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		if (newsCounter > ($('.info').length)) {
 			newsCounter = 1;
 		} else {
+			$('.info-' + newsCounter).css('display', 'block');
 			newsCounter++;
 		}
 
-		$('.info-' + newsCounter).css('display', 'block');
 
 	}
 	setInterval(fadingData, 11100);
