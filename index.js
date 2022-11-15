@@ -99,10 +99,34 @@ async function loadSite() {
 
     // Index site
     app.get('/', function(req, res) {
-        res.render('index.pug', {
-            // sends net1 bool into the variable netstatus on index.pug
-            netstatus: net1,
-        })
+        var connection = con.getConnection()
+        connection.connect();
+        var newsList = []
+        connection.query("SELECT * FROM news", (err, rows) => {
+            if (err) {
+                res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
+            } else {
+                // Loop check on each row
+                for (var i = 0; i < rows.length; i++) {
+
+                    // Create an object to save current row's data
+                    var news = {
+                        'enddate': rows[i].Enddate,
+                        'startdate': rows[i].Startdate,
+                        'body': rows[i].Body,
+                        'header': rows[i].Header,
+                        'id': rows[i].ID,
+                        'index': i
+                    }
+                    // Add object into array
+                    newsList.push(news);
+                }
+            }
+            res.render('index.pug', { newsList: newsList, netstatus: net1 })
+        });
+
+        // Close the MySQL connection
+        connection.end();
     })
 
     //#region admin panel
