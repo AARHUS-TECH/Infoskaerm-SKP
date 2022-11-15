@@ -109,8 +109,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	async function fadingData() {
 		info.css('display', 'none');
 
-		console.log(newsCounter);
-
 		// If newsCounter is less of equal than (3) display block and ++
 		if (newsCounter < info.length -1) {
 			newsCounter++;
@@ -118,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			newsCounter = 0;
 		}
 
+		console.log(newsCounter);
 		$('.info-' + newsCounter).css('display', 'block');
 
 	}
