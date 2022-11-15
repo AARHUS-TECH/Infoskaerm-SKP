@@ -34,32 +34,6 @@ setInterval(loadSite, 10000) // 10000ms, website live reloads every 10 seconds
 // Create the Express application object
 const app = express()
 
-//#region JSON api
-app.get('/getMyJSON', function(req, res) { // data træk til opslagene med json og ajax
-        var opslagdata = "*";
-
-        db.query("SELECT * FROM news  WHERE Active=1 ORDER BY Startdate ASC", (err, rows, ) => {
-            if (err) console.log(err);
-
-            opslagdata = '{';
-            opslagdata += '"news":[';
-            for (var i = 0; i < rows.length; i++) {
-                opslagdata += '{';
-                opslagdata += '"header" : "' + rows[i].Header + '",';
-                opslagdata += '"body" : "' + rows[i].Body + '",';
-                opslagdata += '"startdate" : "' + rows[i].Startdate + '",';
-                opslagdata += '"enddate" : "' + rows[i].Enddate + '"';
-                opslagdata += '},';
-            };
-
-            opslagdata = opslagdata.substring(0, (opslagdata.length) - 1)
-            opslagdata += ']}';
-            res.send(opslagdata);
-        });
-    })
-    //#endregion JSON api
-
-
 //#region REDIS sessioncookies
 app.use(sess({
         secret: 'WeNeedARaise',
