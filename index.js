@@ -71,7 +71,7 @@ async function loadSite() {
     con.removeNews();
 
     // Index site
-    app.get('/', function(req, res) {
+    app.get('/', function (req, res) {
         var connection = con.getConnection()
         connection.connect();
         var newsList = []
@@ -106,18 +106,18 @@ async function loadSite() {
     //#region admin panel
 
     //Login site
-    app.get("/login", function(req, res) {
+    app.get("/login", function (req, res) {
         res.render('login.pug', {
             verifyFail: req.session.verificationFailed // Transfer check over to pug file
         })
     })
 
     // Login system authentication
-    app.post("/authenticate", encoder, function(req, res) {
+    app.post("/authenticate", encoder, function (req, res) {
         var Id = req.body.id
         var password = req.body.password
         db.query('SELECT * FROM users', (err, rows) => {
-            db.query("SELECT * FROM users WHERE Id = ? AND password = ?", [Id, password], function(error, results, fields) {
+            db.query("SELECT * FROM users WHERE Id = ? AND password = ?", [Id, password], function (error, results, fields) {
                 if (err) throw err;
                 if (results.length > 0 && rows[Id].status == "superuser") {
                     req.session.key = Id;
@@ -131,7 +131,7 @@ async function loadSite() {
 
     })
 
-    app.get('/admin/', function(req, res) {
+    app.get('/admin/', function (req, res) {
         let session = req.session
         if (session.key) {
             res.render('admin/dashboard.pug'), {
@@ -139,11 +139,11 @@ async function loadSite() {
             }
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect("/login")
+            res.redirect(req.baseUrl + 'login')
         }
     })
 
-    app.get('/admin/dashboard', function(req, res) {
+    app.get('/admin/dashboard', function (req, res) {
         let session = req.session
         if (session.key) {
             res.render('admin/dashboard.pug'), {
@@ -151,7 +151,7 @@ async function loadSite() {
             }
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect("/login")
+            res.redirect(req.baseUrl + 'login')
         }
     })
 
@@ -165,57 +165,58 @@ async function loadSite() {
             }
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect("/login")
+            res.redirect(req.baseUrl + 'login')
         }
     })
 
     // DATABASE USERS
 
-    app.get('/admin/database/users', function(req, res) {
-            let session = req.session
-            var connection = con.getConnection()
-            connection.connect();
+    app.get('/admin/database/users', function (req, res) {
+        let session = req.session
+        var connection = con.getConnection()
+        connection.connect();
 
-            if (session.key) {
-                var personList = []
-                connection.query("SELECT * FROM users", (err, rows, fields) => {
-                    if (err) {
-                        res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
-                    } else {
-                        // Loop check on each row
-                        for (var i = 0; i < rows.length; i++) {
+        if (session.key) {
+            var personList = []
+            connection.query("SELECT * FROM users", (err, rows, fields) => {
+                if (err) {
+                    res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
+                } else {
+                    // Loop check on each row
+                    for (var i = 0; i < rows.length; i++) {
 
-                            // Create an object to save current row's data
-                            var person = {
-                                'firstname': rows[i].Fornavn,
-                                'middlename': rows[i].mellemnavn,
-                                'lastname': rows[i].Efternavn,
-                                'status': rows[i].status,
-                                'id': rows[i].Id
-                            }
-                            // Add object into array
-                            personList.push(person);
+                        // Create an object to save current row's data
+                        var person = {
+                            'firstname': rows[i].Fornavn,
+                            'middlename': rows[i].mellemnavn,
+                            'lastname': rows[i].Efternavn,
+                            'status': rows[i].status,
+                            'id': rows[i].Id
                         }
+                        // Add object into array
+                        personList.push(person);
                     }
-                    res.render('admin/users.pug', { personList: personList, userID: session.key })
-                });
+                }
+                res.render('admin/users.pug', { personList: personList, userID: session.key })
+            });
 
-                // Close the MySQL connection
-                connection.end();
-            } else {
-                req.session.verificationFailed = true // Check to make sure fail message is shown
-                res.redirect("/login")
-            }
-        })
+            // Close the MySQL connection
+            connection.end();
+        } else {
+            req.session.verificationFailed = true // Check to make sure fail message is shown
+            res.redirect(req.baseUrl + 'login')
+        }
+    })
 
     app.get('/admin/database/users/:id', function (req, res) {
-            // Connect to MySQL database.
+        // Connect to MySQL database.
+        let session = req.session
+
+        if (session.key) {
             var connection = con.getConnection();
             connection.connect();
-
             // Do the query to get data.
-            connection.query('SELECT * FROM users WHERE id = ' + req.params.id, function (err, rows, fields) {
-                var person;
+            connection.query('SELECT * FROM users WHERE id = ' + req.params.id, function (err, rows) {
 
                 if (err) {
                     res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
@@ -241,16 +242,20 @@ async function loadSite() {
 
             // Close MySQL connection
             connection.end();
-        })
+        } else {
+            req.session.verificationFailed = true
+            res.redirect(req.baseUrl + 'login')
+        }
+    })
 
     // DATABASE NEWS
 
     app.get('/admin/database/news', function (req, res) {
         let session = req.session
         var connection = con.getConnection()
-        connection.connect();
 
         if (session.key) {
+            connection.connect();
             var newsList = []
             connection.query("SELECT * FROM news", (err, rows, fields) => {
                 if (err) {
@@ -278,43 +283,50 @@ async function loadSite() {
             connection.end();
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect("/login")
+            res.redirect(req.baseUrl + 'login')
         }
     })
 
     app.get('/admin/database/news/:id', function (req, res) {
         // Connect to MySQL database.
+        let session = req.session
         var connection = con.getConnection();
-        connection.connect();
 
-        // Do the query to get data.
-        connection.query('SELECT * FROM news WHERE id = ' + req.params.id, function (err, rows, fields) {
-            var news;
+        if (session.key) {
+            connection.connect();
 
-            if (err) {
-                res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
-            } else {
-                // Check if the result is found or not
-                if (rows.length == 1) {
-                    // Create the object to save the data.
-                    var news = {
-                        'enddate': rows[0].Enddate,
-                        'startdate': rows[0].Startdate,
-                        'body': rows[0].Body,
-                        'header': rows[0].Header,
-                        'id': rows[0].ID
-                    }
-                    // render the details.plug page.
-                    res.render('admin/newsDetails', { news: news });
+            // Do the query to get data.
+            connection.query('SELECT * FROM news WHERE id = ' + req.params.id, function (err, rows, fields) {
+                var news;
+
+                if (err) {
+                    res.status(500).json({ "status_code": 500, "status_message": "internal server error" });
                 } else {
-                    // render not found page
-                    res.status(404).json({ "status_code": 404, "status_message": "Not found" });
+                    // Check if the result is found or not
+                    if (rows.length == 1) {
+                        // Create the object to save the data.
+                        var news = {
+                            'enddate': rows[0].Enddate,
+                            'startdate': rows[0].Startdate,
+                            'body': rows[0].Body,
+                            'header': rows[0].Header,
+                            'id': rows[0].ID
+                        }
+                        // render the details.plug page.
+                        res.render('admin/newsDetails', { news: news });
+                    } else {
+                        // render not found page
+                        res.status(404).json({ "status_code": 404, "status_message": "Not found" });
+                    }
                 }
-            }
-        });
+            });
 
             // Close MySQL connection
             connection.end();
+        } else {
+            req.session.verificationFailed = true // Check to make sure fail message is shown
+            res.redirect(req.baseUrl + 'login')
+        }
     });
 
     app.get('/deleteNews/:id', function (req, res) {
@@ -335,26 +347,30 @@ async function loadSite() {
     })
 
     app.post('/changeNewsDetails/:id', function (req, res) {
-
-        // Connect to MySQL database.
         var connection = con.getConnection();
+        let session = req.session
 
-        // Local Variabels
-        var header = req.body.header;
-        var body = req.body.body;
-        var startdate = req.body.startdate;
-        var enddate = req.body.enddate;
-        var id = req.params.id;
+        if (session.key) {
+            // Request variabels
+            var header = req.body.header;
+            var body = req.body.body;
+            var startdate = req.body.startdate;
+            var enddate = req.body.enddate;
+            var id = req.params.id;
 
-        connection.connect();
+            connection.connect();
 
-        connection.query("UPDATE news SET Header=?,Body=?,Startdate=?,Enddate=?, Active=1 WHERE id=?", [header, body, startdate, enddate, id], (err, result) => {
-            if (err) {
-                console.log(err)
-            } else {
-                res.send(`"Updated ${ startdate }${ enddate }"`)
-            }
-        })
+            connection.query("UPDATE news SET Header=?,Body=?,Startdate=?,Enddate=?, Active=1 WHERE id=?", [header, body, startdate, enddate, id], (err, result) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.send(`"Updated ${startdate}${enddate}"`)
+                }
+            })
+        } else {
+            req.session.verificationFailed = true
+            res.redirect(req.baseUrl + 'login')
+        }
 
         //res.redirect(req.baseUrl + '/admin/database/news/:id')
     })
@@ -379,25 +395,29 @@ async function loadSite() {
     })
 
     app.post('/changeDetails/:id', function (req, res) {
-
-        // Connect to MySQL database.
         var connection = con.getConnection();
+        let session = req.session
 
-        // Local Variabels
-        var fname = req.body.firstname;
-        var mname = req.body.middlename;
-        var lname = req.body.lastname;
-        var id = req.params.id;
+        if (session.key) {
+            // Reqest Variabels
+            var fname = req.body.firstname;
+            var mname = req.body.middlename;
+            var lname = req.body.lastname;
+            var id = req.params.id;
 
-        connection.connect();
+            connection.connect();
 
-        connection.query("UPDATE users SET Fornavn=?,mellemnavn=?,Efternavn=? WHERE id=?",[fname,mname,lname, id], (err, result) => {
-            if (err) {
-                console.log(err)
-            } else {
-                res.send("UPDATED")
-            }
-        })
+            connection.query("UPDATE users SET Fornavn=?,mellemnavn=?,Efternavn=? WHERE id=?", [fname, mname, lname, id], (err, result) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.send("UPDATED")
+                }
+            })
+        } else {
+            req.session.verificationFailed = true
+            res.redirect(req.baseUrl + 'login')
+        }
 
         res.redirect(req.baseUrl + '/admin/database/users/:id')
     })
