@@ -165,7 +165,7 @@ async function loadSite() {
             }
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
     })
 
@@ -204,7 +204,7 @@ async function loadSite() {
             connection.end();
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
     })
 
@@ -244,7 +244,7 @@ async function loadSite() {
             connection.end();
         } else {
             req.session.verificationFailed = true
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
     })
 
@@ -283,7 +283,7 @@ async function loadSite() {
             connection.end();
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
     })
 
@@ -325,7 +325,7 @@ async function loadSite() {
             connection.end();
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
     });
 
@@ -342,7 +342,7 @@ async function loadSite() {
             res.render('admin/database')
         } else {
             req.session.verificationFailed = true
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
     })
 
@@ -369,7 +369,7 @@ async function loadSite() {
             })
         } else {
             req.session.verificationFailed = true
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
 
         //res.redirect(req.baseUrl + '/admin/database/news/:id')
@@ -390,7 +390,7 @@ async function loadSite() {
             res.render('admin/database')
         } else {
             req.session.verificationFailed = true
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
     })
 
@@ -416,7 +416,7 @@ async function loadSite() {
             })
         } else {
             req.session.verificationFailed = true
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
 
         res.redirect(req.baseUrl + '/admin/database/users/:id')
