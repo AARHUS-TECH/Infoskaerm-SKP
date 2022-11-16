@@ -97,6 +97,8 @@ async function loadSite() {
             res.render('index.pug', { newsList: newsList, netstatus: net1 })
         });
 
+        console.log(newsList)
+
         // Close the MySQL connection
         connection.end();
     })
