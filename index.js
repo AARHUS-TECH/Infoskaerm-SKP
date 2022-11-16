@@ -131,7 +131,7 @@ async function loadSite() {
 
     })
 
-    app.get('/admin/', function (req, res) {
+    app.get('/admin', function (req, res) {
         let session = req.session
         if (session.key) {
             res.render('admin/dashboard.pug'), {
@@ -139,7 +139,7 @@ async function loadSite() {
             }
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
     })
 
