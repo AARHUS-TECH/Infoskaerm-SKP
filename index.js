@@ -151,7 +151,7 @@ async function loadSite() {
             }
         } else {
             req.session.verificationFailed = true // Check to make sure fail message is shown
-            res.redirect(req.baseUrl + 'login')
+            res.redirect(req.baseUrl + '/login')
         }
     })
 
