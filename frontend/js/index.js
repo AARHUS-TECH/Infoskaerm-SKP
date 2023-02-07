@@ -1,23 +1,27 @@
 n = 0
+
+/*
 document.addEventListener("DOMContentLoaded", function(event) {
 
 	document.onmousemove = (function () {
 		var onmousestop = function () {
 			/* do stuff when mouse stops */
-			document.querySelector(".center").style.cursor = "none";
-			},
+			//document.querySelector("body").style.cursor = "none";
+			/*},
 			thread;
 
 		return function () {
 			clearTimeout(thread);
-			thread = setTimeout(onmousestop, 5000);
+			thread = setTimeout(onmousestop, 10000);
 		};
 	})();
 
 	addEventListener("mousemove", (event) => {});
 	onmousemove = (event) => {
-	document.querySelector(".center").style.cursor = "default";
+	document.querySelector("body").style.cursor = "default";
 	};
+
+	*/
 
 	setDate()
 
@@ -64,4 +68,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 	setInterval(fadingData, 11100);
 
-})
+//})
