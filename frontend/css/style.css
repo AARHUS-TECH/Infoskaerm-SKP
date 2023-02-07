@@ -2,6 +2,8 @@
   border-radius: 7px;
 }
 
+*, html, body { cursor: none; }
+
 body {
   background-color: #ffff;
   font-family: "poppins", serif;
