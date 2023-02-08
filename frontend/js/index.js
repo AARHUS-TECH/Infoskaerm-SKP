@@ -68,4 +68,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 	setInterval(fadingData, 11100);
 
-//})
+})
