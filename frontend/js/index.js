@@ -1,13 +1,13 @@
 n = 0
 
-/*
+
 document.addEventListener("DOMContentLoaded", function(event) {
 
 	document.onmousemove = (function () {
 		var onmousestop = function () {
 			/* do stuff when mouse stops */
-			//document.querySelector("body").style.cursor = "none";
-			/*},
+			document.querySelector("body").style.cursor = "none";
+			},
 			thread;
 
 		return function () {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.querySelector("body").style.cursor = "default";
 	};
 
-	*/
+	
 
 	setDate()
 
