@@ -64,10 +64,10 @@ async function loadSite() {
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static('admin'));
-    app.use(express.static('frontend'));
     app.use('/images', express.static("./frontend/images"));
     app.use('/frontend/js', express.static(path.join(__dirname, '/frontend/js')));
     app.use('/frontend/css', express.static(path.join(__dirname, '/frontend/css')));
+    
 
     
 
