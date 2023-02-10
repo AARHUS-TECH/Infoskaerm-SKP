@@ -168,7 +168,6 @@ body {
 .ticker {
   z-index: -999;
   display: flex;
-  flex-wrap: wrap;
   height: 80px;
   margin: 0 auto;
   width: 110%;
